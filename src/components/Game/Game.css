@@ -1,3 +1,15 @@
-/* .Game{
-    width: 1000px;
-} */
+.Game{
+    max-width: 500px;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(43, 47, 53, 100%);
+    border-radius: 1.25rem;
+}
+
+.Game-img{
+    max-width:  400px;
+    height: 400px;
+    object-fit: cover;
+}
