@@ -13,7 +13,7 @@ const App=()=> {
    <GameListContext.Provider value={[gameList, setGameList]}>
      <Routes>
        <Route path="/" element={<Homepage />} />
-       <Route path="/Game/name:" element={<GameDetails />} />
+       <Route path="/Game/:name" element={<GameDetails />} />
      </Routes>
      </GameListContext.Provider>
      
