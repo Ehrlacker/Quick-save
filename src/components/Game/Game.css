@@ -1,15 +1,28 @@
 .Game{
-    max-width: 500px;
+    width: 400px;
+    height: auto;
     display: flex;
     flex-direction:column;
     justify-content: center;
     align-items: center;
-    background-color: rgb(43, 47, 53, 100%);
+    /* background-color: rgb(43, 47, 53, 100%); */
     border-radius: 1.25rem;
+    transition: transform 0.2s;
 }
 
 .Game-img{
     max-width:  400px;
     height: 400px;
     object-fit: cover;
+    border-radius: 1.25rem;
+    /* margin-top: -1.5rem; */
+}
+
+.AddGame{
+    width: 30px;
+    color: white;
+    background-color: black;
+    position: relative;
+    bottom: 24rem;
+    left: 11rem;
 }

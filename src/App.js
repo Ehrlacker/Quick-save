@@ -1,17 +1,22 @@
 import {Routes, Route} from 'react-router-dom'
 import './App.css';
-// import Navbar from './components/Navbar/Navbar';
-// import Footer from './components/Footer/Footer'
+import{createContext, useState} from 'react'
 import Homepage from './pages/HomePage/HomePage'
+import GameDetails from './pages/GameDetails/GameDetails'
+
+export const GameListContext = createContext()
 
 const App=()=> {
+  const[gameList, setGameList] = useState([])
   return (
     <div className="App">
-    {/* <Navbar /> */}
+   <GameListContext.Provider value={[gameList, setGameList]}>
      <Routes>
        <Route path="/" element={<Homepage />} />
+       <Route path="/Game/name:" element={<GameDetails />} />
      </Routes>
-     {/* <Footer /> */}
+     </GameListContext.Provider>
+     
     </div>
   );
 }

@@ -1,25 +1,21 @@
 import React from "react"
 
-const Pagination = ({ totalPosts, postsPerPage, paginate }) => {
-  let pages = []
-  for (let i = 1; i <= Math.ceil( totalPosts  / postsPerPage); i++) {
-    pages.push(i)
-    console.log(pages)
-  }
+const Pagination = (props) => {
   return (
-    <nav className= "w-full h-16 flex justify-center items-center">
-      <ul className="flex ">
-        {pages.map((number) => {
-          return (
-            <li key={number} className="page-Number ">
-              <a onClick={()=> paginate(number)}href="!#" className="page-link text-white text-3xl m-2">
-                {number}
-              </a>
-            </li>
-          )
-        })}
-      </ul>
-    </nav>
+    <div className="w-full flex justify-center items-center">
+      <div className="flex m-4">
+        <button
+          className="text-white m-4 text-2xl font-bold"
+          onClick={props.previous}
+        >
+          Previous
+        </button>
+        <p className="text-white m-4 text-2xl font-bold">{props.pageNumber}</p>
+        <button className="text-white m-4 text-2xl font-bold" onClick={props.next}>
+          Next
+        </button>
+      </div>
+    </div>
   )
 }
 
