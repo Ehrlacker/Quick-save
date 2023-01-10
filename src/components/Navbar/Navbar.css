@@ -3,6 +3,7 @@
 .Navbar{
     background-image: url(../../assets/images/ribbon-light-space.jpeg);
     background-position: center;
+width: 100vw;
 }
 
 .Logo{

@@ -25,7 +25,7 @@ const GameDetails = () => {
   }, [name])
 
   return (
-    <div className="GameDetails w-full bg-black">
+    <div className="GameDetails bg-black">
       <Navbar />
 
       <div className="w-full">
@@ -39,7 +39,7 @@ const GameDetails = () => {
                 alt="a game"
               />
 
-              <div className="max-w-[100rem] flex relative justify-center items-center bg-black">
+              <div className="w-full flex relative justify-center items-center bg-black">
                 <ChevronLeftIcon className="w-16 text-white " />
 
                 <ul className=" ScrollBar flex items-center w-full h-30 overflow-x-scroll scroll whitespace-nowrap scrolling-touch scroll-smooth bg-black mt-8">
@@ -62,19 +62,7 @@ const GameDetails = () => {
                 <p className="text-white">Release date: {x.released}</p>
                 <p className="text-white">Rating: {x.rating}</p>
               </div>
-              {/* <ul className="flex text-white justify-start items-start">
-              Platforms: 
-              {game.map((y)=>{
-                return(
-                  y.platforms.map((z)=>{
-                    console.log(z)
-                    return (
-                      <li className="text-white ml-8">{z.platform.name}</li>
-                    )
-                  })
-                )
-              })}  
-              </ul> */}
+              
             </div>
           )
         })}

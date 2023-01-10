@@ -12,7 +12,7 @@ const Game = (props) => {
         onClick={props.onClick}
       />
 
-      <button onClick={()=>{props.addToBuyList({name: props.title, rating: props.rating, image: props.img})}} className="AddGame">
+      <button onClick={props.addOrRemoveFromBuyList} className="AddGame">
         <PlusCircleIcon />
       </button>
 
@@ -31,3 +31,5 @@ const Game = (props) => {
 }
 
 export default Game
+
+// ()=>{props.addToBuyList({name: props.title, rating: props.rating, image: props.img})}

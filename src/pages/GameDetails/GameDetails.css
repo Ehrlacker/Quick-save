@@ -1,5 +1,9 @@
 
 
+.GameDetails{
+    width: 100vw;
+}
+
 .GameContainer{
     display: flex;
     flex-direction: column;

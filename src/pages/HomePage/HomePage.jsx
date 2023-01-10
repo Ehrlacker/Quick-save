@@ -24,13 +24,14 @@ const HomePage = ({buyList, setBuyList}) => {
   const navigate = useNavigate()
 
 
-
+//MustPlayGames api call
   useEffect(() => {
     fetch("https://rawg.io/api/collections/must-play/games")
       .then((resp) => resp.json())
       .then(({ results }) => setMustPlay(results))
   }, [])
 
+  //FindGames api call
   const getGamesList = async () => {
     const url = `https://api.rawg.io/api/games?key=${apiKey}&page_size=18&page=${pageNumber}&search=${gameSearch}`
     const response = await fetch(url)
@@ -68,29 +69,32 @@ const HomePage = ({buyList, setBuyList}) => {
   }
 
   const addToBuyList =(game)=>{
-    const newGameList = [...buyList, game]
-    console.log(game)
-    setBuyList(newGameList)
+    const newBuyList = [...buyList, game]
+    setBuyList(newBuyList)
     console.log('game added')
-    console.log(newGameList)
+    saveToLocalStorage(newBuyList)
+  }
+
+  const saveToLocalStorage=(items)=>{
+    localStorage.setItem('video-game-buy-list', JSON.stringify(items))
   }
   
 
 
   return (
-    <div className="HomePage w-[100rem] bg-black">
+    <div className="HomePage bg-black">
       <Navbar />
 
       <h1 className="text-white text-5xl font-bold text-center mt-16 mb-8">
         Must Play Games
       </h1>
-      <div className="w-full flex relative justify-center items-center bg-black">
-        <div className="max-w-[100rem] flex">
+      <div className="HomeScrollBarContainer w-full flex relative justify-center items-center bg-black">
+        <div className=" flex w-full">
           <ChevronLeftIcon
             onClick={() => scroll(-20)}
             className="w-16 text-white "
           />
-          <ul className="flex w-full overflow-x-scroll scroll whitespace-nowrap scrolling-touch scroll-smooth bg-black">
+          <ul className="HomeScrollBar flex overflow-x-scroll scroll whitespace-nowrap scrolling-touch scroll-smooth bg-black">
             {mustPlay.map((game) => {
               return (
                 <Game
@@ -99,7 +103,7 @@ const HomePage = ({buyList, setBuyList}) => {
                   img={game.background_image}
                   rating={game.rating}
                   // addList={()=>console.log("yeessssss")}
-                  addToBuyList={addToBuyList}
+                  addOrRemoveFromBuyList={()=>addToBuyList(game)}
               onClick={()=>navigate(`/game/${game.name}`)}
                 />
               )
@@ -133,8 +137,9 @@ const HomePage = ({buyList, setBuyList}) => {
               title={game.name}
               img={game.background_image}
               rating={game.rating}
-              game={game}
-              addToBuyList={addToBuyList}
+              // game={game}
+              // addToBuyList={addToBuyList}
+              addOrRemoveFromBuyList={()=>addToBuyList(game)}
               onClick={()=>navigate(`/game/${game.name}`)}
             />
           

@@ -6,8 +6,6 @@ import './Navbar.css'
 const Navbar = (props) => {
   return (
     <div className="Navbar p-8 w-full flex flex-col items-center justify-center">
-
-
     <div className="w-full">
     <div className="flex items-center mt-8">
       <img className="Logo" 
