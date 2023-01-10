@@ -16,8 +16,11 @@ const Navbar = (props) => {
       <h1 className="text-8xl text-white ml-8 font-bold">Quick-Save</h1>
       </div>
       <nav className="flex mt-16 items-center">
-        <NavItem title="Home" />
-        <NavItem title="Buy list" />
+        <NavItem 
+        page={'/'}
+        title="Home" />
+        <NavItem
+        page={'/BuyList'} title="Buy list" />
         <NavItem title="Sign in" />
         <NavItem title="Register" />
       </nav>

@@ -4,7 +4,7 @@ import Pagination from "../../components/Pagination/Pagination"
 import SearchBar from "../../components/SearchBar/SearchBar"
 import apiKey from "../../apiKey/apiKey"
 import React, { useState, useEffect, useRef} from "react"
-// import GameListContext from '../../App'
+
 import {useNavigate} from 'react-router-dom'
 
 import { ChevronLeftIcon } from "@heroicons/react/24/solid"
@@ -14,13 +14,13 @@ import Game from "../../components/Game/Game"
 
 import "./HomePage.css"
 
-const HomePage = () => {
+const HomePage = ({buyList, setBuyList}) => {
   const [mustPlay, setMustPlay] = useState([])
   const [games, setGames] = useState([])
   const [pageNumber, setPageNumber] = useState(1)
   const [gameSearch, setGameSearch] = useState("")
 
-  // const [gameList, setGameList] = useContext(GameListContext)
+  
   const navigate = useNavigate()
 
 
@@ -29,7 +29,6 @@ const HomePage = () => {
     fetch("https://rawg.io/api/collections/must-play/games")
       .then((resp) => resp.json())
       .then(({ results }) => setMustPlay(results))
-    console.log(mustPlay)
   }, [])
 
   const getGamesList = async () => {
@@ -65,15 +64,16 @@ const HomePage = () => {
   const ref = useRef(null)
   const scroll = (scrollOffset) => {
     ref.current.scrollLeft += scrollOffset
+    console.log('clicked')
   }
 
-  // const addToGameList =(game)=>{
-  //   const newGameList = [...gameList, game]
-  //   setGameList(newGameList)
-  //   console.log('game added')
-  //   console.log(gameList)
-
-  // }
+  const addToBuyList =(game)=>{
+    const newGameList = [...buyList, game]
+    console.log(game)
+    setBuyList(newGameList)
+    console.log('game added')
+    console.log(newGameList)
+  }
   
 
 
@@ -98,6 +98,9 @@ const HomePage = () => {
                   title={game.name}
                   img={game.background_image}
                   rating={game.rating}
+                  // addList={()=>console.log("yeessssss")}
+                  addToBuyList={addToBuyList}
+              onClick={()=>navigate(`/game/${game.name}`)}
                 />
               )
             })}
@@ -107,6 +110,8 @@ const HomePage = () => {
             onClick={() => scroll(20)}
             className="w-16 text-white"
           />
+
+
         </div>
       </div>
       <h1 className="text-white text-5xl font-bold text-center mt-16 ">
@@ -128,9 +133,11 @@ const HomePage = () => {
               title={game.name}
               img={game.background_image}
               rating={game.rating}
-              // onClick={addToGameList}
+              game={game}
+              addToBuyList={addToBuyList}
               onClick={()=>navigate(`/game/${game.name}`)}
             />
+          
           )
         })}
         <Pagination
@@ -145,3 +152,10 @@ const HomePage = () => {
 }
 
 export default HomePage
+
+
+  // {/* <Game
+  //           addToBuyList={addToBuyList}
+  //             onClick={()=>navigate(`/game/${game.name}`)}
+  //             game={game}
+  //            /> */}

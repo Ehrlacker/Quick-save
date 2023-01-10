@@ -12,9 +12,10 @@ const Game = (props) => {
         onClick={props.onClick}
       />
 
-      <button onClick={props.addList} className="AddGame">
+      <button onClick={()=>{props.addToBuyList({name: props.title, rating: props.rating, image: props.img})}} className="AddGame">
         <PlusCircleIcon />
       </button>
+
       <div className="flex justify-between items-center w-full mt-2 mb-2">
         <p className="text-white ">Rating: {props.rating}</p>
       </div>
@@ -24,6 +25,7 @@ const Game = (props) => {
       >
         {props.title}
       </h1>
+      
     </div>
   )
 }

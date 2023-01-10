@@ -1,21 +1,25 @@
 import {Routes, Route} from 'react-router-dom'
 import './App.css';
-import{createContext, useState} from 'react'
+import{useState} from 'react'
 import Homepage from './pages/HomePage/HomePage'
 import GameDetails from './pages/GameDetails/GameDetails'
+import BuyList from './pages/BuyList/BuyList'
 
-export const GameListContext = createContext()
 
 const App=()=> {
-  const[gameList, setGameList] = useState([])
+  
+
+  const [buyList, setBuyList] = useState([])
+
   return (
     <div className="App">
-   <GameListContext.Provider value={[gameList, setGameList]}>
+   
      <Routes>
-       <Route path="/" element={<Homepage />} />
+       <Route path="/" element={<Homepage buyList={buyList} setBuyList={setBuyList} />} />
+       <Route path="/BuyList" element={<BuyList buyList={buyList} setBuyList={setBuyList} />} />
        <Route path="/Game/:name" element={<GameDetails />} />
      </Routes>
-     </GameListContext.Provider>
+     
      
     </div>
   );
