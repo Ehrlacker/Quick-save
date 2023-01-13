@@ -10,7 +10,7 @@
     transition: transform 0.2s;
 }
 
-.Game-img{
+.GameImg{
     max-width:  400px;
     height: 400px;
     object-fit: cover;
@@ -22,7 +22,21 @@
     width: 30px;
     color: white;
     background-color: black;
-    position: relative;
-    bottom: 24rem;
-    left: 11rem;
+   
 }
+
+
+@media (max-width: 575px) {
+
+    .Game{
+        width: 200px 
+    }
+
+    .GameImg{
+        max-width: 200px;
+        height: 200px;
+    }
+
+    .AddGame{
+    }
+ }
