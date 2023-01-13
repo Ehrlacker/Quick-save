@@ -3,7 +3,7 @@ import {MagnifyingGlassIcon} from "@heroicons/react/24/solid"
 
 const SearchBar = props => {
 	return (
-		<form className="SearchBar w-full mt-16 flex mr-16 ml-16">
+		<div className="SearchBar w-full mt-16 flex mr-16 ml-16">
 			<button className="w-8 text-white " type="button">
 				<MagnifyingGlassIcon onClick={props.onClick} />
 			</button>
@@ -15,7 +15,7 @@ const SearchBar = props => {
 				type="text"
 				onKeyPress={props.pressEnter}
 			/>
-		</form>
+		</div>
 	)
 }
 

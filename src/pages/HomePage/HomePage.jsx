@@ -8,6 +8,7 @@ import {useNavigate} from "react-router-dom"
 import {ChevronLeftIcon} from "@heroicons/react/24/solid"
 import {ChevronRightIcon} from "@heroicons/react/24/solid"
 import Game from "../../components/Game/Game"
+import BackgroundImage from "../../assets/images/ribbon-light-space.jpeg"
 import "./HomePage.css"
 
 const HomePage = ({buyList, setBuyList}) => {
@@ -16,6 +17,7 @@ const HomePage = ({buyList, setBuyList}) => {
 	const [pageNumber, setPageNumber] = useState(1)
 	const [gameSearch, setGameSearch] = useState("")
 	const [gameInputValue, setGameInputValue] = useState("")
+	const [dontCallApiAgain, setDontCallApiAgain] = useState(0)
 	const navigate = useNavigate()
 
 	//MustPlayGames api call
@@ -27,11 +29,14 @@ const HomePage = ({buyList, setBuyList}) => {
 
 	//FindGames api call
 	const getGamesList = async () => {
-		const url = `https://api.rawg.io/api/games?key=${apiKey}&page_size=18&page=${pageNumber}&search=${gameSearch}`
+		const url = `https://api.rawg.io/api/games?key=${apiKey}&page_size=18&page=${pageNumber}&search=${gameSearch}&search_precise=true`
 		const response = await fetch(url)
 		const resJSON = await response.json()
 		console.log(resJSON.results)
 		setGames(resJSON.results)
+		if (resJSON.next === null) {
+			setDontCallApiAgain(1)
+		}
 	}
 
 	useEffect(() => {
@@ -39,9 +44,15 @@ const HomePage = ({buyList, setBuyList}) => {
 	}, [pageNumber, gameSearch])
 
 	const nextPage = () => {
-		setPageNumber(prevValue => {
-			return prevValue + 1
-		})
+		if (dontCallApiAgain === 1) {
+			return
+		} else {
+			setPageNumber(prevValue => {
+				return prevValue + 1
+			})
+		}
+
+		console.log(pageNumber)
 	}
 
 	const previousPage = () => {
@@ -52,6 +63,7 @@ const HomePage = ({buyList, setBuyList}) => {
 				console.log(prevValue - 1)
 				return prevValue - 1
 			})
+			setDontCallApiAgain(0)
 		}
 	}
 
@@ -60,10 +72,21 @@ const HomePage = ({buyList, setBuyList}) => {
 		setGameInputValue(newValue)
 	}
 
-	const SearchForGame = e => {
+	const SearchForGame = () => {
 		setGameSearch(gameInputValue)
+		setGameInputValue("")
 		console.log(gameInputValue)
 	}
+
+	// const handleKeypress = e => {
+	// 	if (e.keyCode === 13) {
+	// 		console.log("enter presses")
+	// 	}
+	// 	if (e.keyCode !== 13) {
+	// 		console.log("enter not pressed")
+	// 	}
+	// 	console.log("key pressed")
+	// }
 
 	const addToBuyList = game => {
 		const alreadyExists = buyList.some(buy => buy["id"] === game.id)
@@ -134,13 +157,18 @@ const HomePage = ({buyList, setBuyList}) => {
 					value={gameInputValue}
 					onChange={handleSearchOnChange}
 					onClick={SearchForGame}
+					// pressEnter={handleKeypress}
 				/>
 				{games.map(game => {
 					return (
 						<Game
 							key={game.id}
 							title={game.name}
-							img={game.background_image}
+							img={
+								game.background_image === null
+									? BackgroundImage
+									: game.background_image
+							}
 							rating={game.rating}
 							addOrRemoveFromBuyList={() => addToBuyList(game)}
 							onClick={() => navigate(`/game/${game.name}`)}

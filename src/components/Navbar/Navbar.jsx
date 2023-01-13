@@ -14,8 +14,8 @@ const Navbar = props => {
 				<nav className="flex mt-16 items-center">
 					<NavItem page={"/"} title="Home" />
 					<NavItem page={"/BuyList"} title="Buy list" />
-					<NavItem title="Sign in" />
-					<NavItem title="Register" />
+					{/* <NavItem title="Sign in" />
+					<NavItem title="Register" /> */}
 				</nav>
 			</div>
 		</div>

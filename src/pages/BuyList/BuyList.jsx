@@ -1,14 +1,16 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect} from "react"
 import Game from "../../components/Game/Game"
 import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
 import GameForm from "../../components/GameForm/GameForm"
 import "./BuyList.css"
-// import {ChevronDoubleLeftIcon} from "@heroicons/react/24/solid"
+import useLocalStorage from "../../hooks/useLocalStorage"
 
 const BuyList = ({buyList, setBuyList}) => {
-	const [firstInput, setFirstInput] = useState("")
-	const [secondInput, setSecondInput] = useState("")
+	// const [firstInput, setFirstInput] = useState("")
+	// const [secondInput, setSecondInput] = useState("")
+	const [firstInput, setFirstInput] = useLocalStorage("firstInput", [])
+	const [secondInput, setSecondInput] = useLocalStorage("secondInput", [])
 
 	const handleFirstInput = e => {
 		const newValue = e.target.value
@@ -56,6 +58,7 @@ const BuyList = ({buyList, setBuyList}) => {
 								addOrRemoveFromBuyList={() => removeFromBuyList(game)}
 							/>
 							<GameForm
+								key={game.id}
 								firstChange={handleFirstInput}
 								secondChange={handleSecondInput}
 								value1={firstInput}
