@@ -94,10 +94,19 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 	}
 
 	const addToLibraryList = game => {
-		const newLibraryList = [...libraryList, game]
-		setLibraryList(newLibraryList)
-		console.log(newLibraryList)
-		console.log(libraryList)
+		// const newLibraryList = [...libraryList, game]
+		// setLibraryList(newLibraryList)
+		// console.log(newLibraryList)
+		// console.log(libraryList)
+		const alreadyExists = libraryList.some(library => library["id"] === game.id)
+		if (alreadyExists === false) {
+			const newLibraryList = [...libraryList, game]
+			setLibraryList(newLibraryList)
+
+			alert(`${game.name} added to library List`)
+		} else {
+			alert(`Warning! ${game.name} already added to Library List`)
+		}
 	}
 
 	const saveToLocalStorage = items => {

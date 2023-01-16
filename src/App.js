@@ -5,11 +5,12 @@ import Homepage from "./pages/HomePage/HomePage"
 import GameDetails from "./pages/GameDetails/GameDetails"
 import BuyList from "./pages/BuyList/BuyList"
 import MyLibrary from "./pages/MyLibrary/MyLibrary"
-// import useLocalStorage from "./hooks/useLocalStorage"
+import useLocalStorage from "./hooks/useLocalStorage"
 
 const App = () => {
 	const [buyList, setBuyList] = useState([])
-	const [libraryList, setLibraryList] = useState([])
+	// const [libraryList, setLibraryList] = useState([])
+	const [libraryList, setLibraryList] = useLocalStorage("libraryList", [])
 	//  useLocalStorage("favorites", [])
 
 	return (

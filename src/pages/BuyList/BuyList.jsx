@@ -3,7 +3,7 @@ import Game from "../../components/Game/Game"
 
 import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
-
+import {PlusCircleIcon} from "@heroicons/react/24/solid"
 import EmptyBuyList from "../../components/EmptyBuyList/EmptyBuyList"
 import "./BuyList.css"
 // import useLocalStorage from "../../hooks/useLocalStorage"
@@ -42,6 +42,7 @@ const BuyList = ({buyList, setBuyList}) => {
 								title={game.name}
 								img={game.background_image}
 								rating={game.rating}
+								addBuyListIcon={<PlusCircleIcon className="hover:text-red-500" />}
 								addOrRemoveFromBuyList={() => removeFromBuyList(game)}
 							/>
 						)
