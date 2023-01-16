@@ -86,7 +86,7 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 		if (alreadyExists === false) {
 			const newBuyList = [...buyList, game]
 			setBuyList(newBuyList)
-			saveToLocalStorage(newBuyList)
+			// saveToLocalStorage(newBuyList)
 			alert(`${game.name} added to Buy List`)
 		} else {
 			alert(`Warning! ${game.name} already added to Buy List`)
@@ -105,9 +105,9 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 		}
 	}
 
-	const saveToLocalStorage = items => {
-		localStorage.setItem("video-game-buy-list", JSON.stringify(items))
-	}
+	// const saveToLocalStorage = items => {
+	// 	localStorage.setItem("video-game-buy-list", JSON.stringify(items))
+	// }
 
 	//Chevron Icon scroll
 	const ref = useRef(null)
@@ -116,7 +116,7 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 	}
 
 	return (
-		<div className="HomePage bg-black">
+		<div className="HomePage bg-black w-screen h-full block bg-no-repeat bg-cover">
 			<Navbar />
 
 			<h1 className="text-white text-5xl font-bold text-center mt-16 mb-8">

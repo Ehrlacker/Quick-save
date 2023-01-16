@@ -1,6 +1,5 @@
 import React from "react"
 
-// import {PlusCircleIcon} from "@heroicons/react/24/solid"
 import "./Game.css"
 
 const Game = props => {
@@ -13,7 +12,6 @@ const Game = props => {
 					onClick={props.addOrRemoveFromBuyList}
 					className="AddGame bottom-48 left-36"
 				>
-					{/* <PlusCircleIcon className="hover:text-green-500" /> */}
 					{props.addBuyListIcon}
 				</button>
 
@@ -21,7 +19,6 @@ const Game = props => {
 					onClick={props.addOrRemoveFromLibraryList}
 					className="AddGame bottom-48 left-36"
 				>
-					{/* <PlusCircleIcon className="hover:text-green-500" /> */}
 					{props.addLibraryListIcon}
 				</button>
 			</div>
@@ -41,5 +38,3 @@ const Game = props => {
 }
 
 export default Game
-
-// ()=>{props.addToBuyList({name: props.title, rating: props.rating, image: props.img})}

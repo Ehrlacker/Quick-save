@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React from "react"
 import Game from "../../components/Game/Game"
 
 import Navbar from "../../components/Navbar/Navbar"
@@ -6,7 +6,6 @@ import Footer from "../../components/Footer/Footer"
 import {PlusCircleIcon} from "@heroicons/react/24/solid"
 import EmptyBuyList from "../../components/EmptyBuyList/EmptyBuyList"
 import "./BuyList.css"
-// import useLocalStorage from "../../hooks/useLocalStorage"
 
 const BuyList = ({buyList, setBuyList}) => {
 	const removeFromBuyList = game => {
@@ -14,23 +13,13 @@ const BuyList = ({buyList, setBuyList}) => {
 			return buyListGame.id !== game.id
 		})
 		setBuyList(newBuyList)
-		saveToLocalStorage(newBuyList)
-	}
-
-	useEffect(() => {
-		const gameBuyList = JSON.parse(localStorage.getItem("video-game-buy-list"))
-		setBuyList(gameBuyList)
-	}, [setBuyList])
-
-	const saveToLocalStorage = items => {
-		localStorage.setItem("video-game-buy-list", JSON.stringify(items))
 	}
 
 	if (buyList.length === 0) {
 		return <EmptyBuyList />
 	} else {
 		return (
-			<div className="BuyList">
+			<div className="BuyList bg-cover bg-no-repeat w-full h-full">
 				<Navbar />
 
 				<div className="BuyGameList w-full flex flex-wrap justify-evenly bg-black mt-16">

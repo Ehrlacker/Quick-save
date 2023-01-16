@@ -37,17 +37,24 @@ const GameDetails = () => {
 		return <EmptyGameDetails />
 	} else {
 		return (
-			<div className="GameDetails">
+			<div className="GameDetails block">
 				<Navbar />
 
-				<div className="GameDetailsPageContainer bg-black">
+				<div className="GameDetailsPageContainer bg-black w-full">
 					{game.map(x => {
 						return (
-							<div className="GameContainer bg-black" key={x.id}>
+							<div
+								className="GameContainer bg-black flex justify-center items-center flex-col"
+								key={x.id}
+							>
 								<h1 className="text-3xl text-center font-bold text-white mb-8 mr-4 ml-4 mt-16 md:text-5xl">
 									{x.name}
 								</h1>
-								<img className="CoverImage" src={x.background_image} alt="a game" />
+								<img
+									className="CoverImage w-3/4"
+									src={x.background_image}
+									alt="a game"
+								/>
 
 								<div className="w-9/12 flex relative  bg-black">
 									<ChevronLeftIcon
@@ -63,7 +70,7 @@ const GameDetails = () => {
 											return (
 												<img
 													key={shot.id}
-													className=" ScrollImage mr-4 ml-4 "
+													className="ScrollImage mr-4 ml-4 w-2/5 h-auto"
 													src={shot.image}
 													alt="a game"
 												/>
@@ -75,6 +82,7 @@ const GameDetails = () => {
 										className="w-16 text-white "
 									/>
 								</div>
+
 								<h1 className="text-wite font-bold text-5xl text-white mt-16">
 									Details
 								</h1>

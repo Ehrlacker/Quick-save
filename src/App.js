@@ -8,10 +8,9 @@ import MyLibrary from "./pages/MyLibrary/MyLibrary"
 import useLocalStorage from "./hooks/useLocalStorage"
 
 const App = () => {
-	const [buyList, setBuyList] = useState([])
-	// const [libraryList, setLibraryList] = useState([])
+	const [buyList, setBuyList] = useLocalStorage("buyList", [])
+
 	const [libraryList, setLibraryList] = useLocalStorage("libraryList", [])
-	//  useLocalStorage("favorites", [])
 
 	return (
 		<div className="App">
