@@ -7,17 +7,20 @@ import React, {useState, useEffect, useRef} from "react"
 import {useNavigate} from "react-router-dom"
 import {ChevronLeftIcon} from "@heroicons/react/24/solid"
 import {ChevronRightIcon} from "@heroicons/react/24/solid"
+import {PlusCircleIcon} from "@heroicons/react/24/solid"
+import {BuildingLibraryIcon} from "@heroicons/react/24/solid"
 import Game from "../../components/Game/Game"
 import BackgroundImage from "../../assets/images/ribbon-light-space.jpeg"
 import "./HomePage.css"
 
-const HomePage = ({buyList, setBuyList}) => {
+const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 	const [mustPlay, setMustPlay] = useState([])
 	const [games, setGames] = useState([])
 	const [pageNumber, setPageNumber] = useState(1)
 	const [gameSearch, setGameSearch] = useState("")
 	const [gameInputValue, setGameInputValue] = useState("")
 	const [dontCallApiAgain, setDontCallApiAgain] = useState(0)
+	// const [libraryList, setLibraryList] = useState([])
 	const navigate = useNavigate()
 
 	//MustPlayGames api call
@@ -78,16 +81,6 @@ const HomePage = ({buyList, setBuyList}) => {
 		console.log(gameInputValue)
 	}
 
-	// const handleKeypress = e => {
-	// 	if (e.keyCode === 13) {
-	// 		console.log("enter presses")
-	// 	}
-	// 	if (e.keyCode !== 13) {
-	// 		console.log("enter not pressed")
-	// 	}
-	// 	console.log("key pressed")
-	// }
-
 	const addToBuyList = game => {
 		const alreadyExists = buyList.some(buy => buy["id"] === game.id)
 		if (alreadyExists === false) {
@@ -98,6 +91,13 @@ const HomePage = ({buyList, setBuyList}) => {
 		} else {
 			alert(`Warning! ${game.name} already added to Buy List`)
 		}
+	}
+
+	const addToLibraryList = game => {
+		const newLibraryList = [...libraryList, game]
+		setLibraryList(newLibraryList)
+		console.log(newLibraryList)
+		console.log(libraryList)
 	}
 
 	const saveToLocalStorage = items => {
@@ -137,6 +137,11 @@ const HomePage = ({buyList, setBuyList}) => {
 								rating={game.rating}
 								addOrRemoveFromBuyList={() => addToBuyList(game)}
 								onClick={() => navigate(`/game/${game.name}`)}
+								addBuyListIcon={<PlusCircleIcon className="hover:text-green-500" />}
+								addLibraryListIcon={
+									<BuildingLibraryIcon className="hover:text-green-500" />
+								}
+								addOrRemoveFromLibraryList={() => addToLibraryList(game)}
 							/>
 						)
 					})}
@@ -157,7 +162,6 @@ const HomePage = ({buyList, setBuyList}) => {
 					value={gameInputValue}
 					onChange={handleSearchOnChange}
 					onClick={SearchForGame}
-					// pressEnter={handleKeypress}
 				/>
 				{games.map(game => {
 					return (
@@ -172,6 +176,11 @@ const HomePage = ({buyList, setBuyList}) => {
 							rating={game.rating}
 							addOrRemoveFromBuyList={() => addToBuyList(game)}
 							onClick={() => navigate(`/game/${game.name}`)}
+							addBuyListIcon={<PlusCircleIcon className="hover:text-green-500" />}
+							addLibraryListIcon={
+								<BuildingLibraryIcon className="hover:text-green-500" />
+							}
+							addOrRemoveFromLibraryList={() => addToLibraryList(game)}
 						/>
 					)
 				})}
@@ -183,9 +192,3 @@ const HomePage = ({buyList, setBuyList}) => {
 }
 
 export default HomePage
-
-// {/* <Game
-//           addToBuyList={addToBuyList}
-//             onClick={()=>navigate(`/game/${game.name}`)}
-//             game={game}
-//            /> */}
