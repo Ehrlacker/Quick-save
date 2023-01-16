@@ -12,7 +12,6 @@ import {ChevronRightIcon} from "@heroicons/react/24/solid"
 const GameDetails = () => {
 	const [game, setGame] = useState([])
 	const {name} = useParams()
-	console.log()
 
 	useEffect(() => {
 		axios

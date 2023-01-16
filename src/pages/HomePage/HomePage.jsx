@@ -54,8 +54,6 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 				return prevValue + 1
 			})
 		}
-
-		console.log(pageNumber)
 	}
 
 	const previousPage = () => {
@@ -78,6 +76,8 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 	const SearchForGame = () => {
 		setGameSearch(gameInputValue)
 		setGameInputValue("")
+		setDontCallApiAgain(0)
+		setPageNumber(1)
 		console.log(gameInputValue)
 	}
 
@@ -94,10 +94,6 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 	}
 
 	const addToLibraryList = game => {
-		// const newLibraryList = [...libraryList, game]
-		// setLibraryList(newLibraryList)
-		// console.log(newLibraryList)
-		// console.log(libraryList)
 		const alreadyExists = libraryList.some(library => library["id"] === game.id)
 		if (alreadyExists === false) {
 			const newLibraryList = [...libraryList, game]
@@ -116,7 +112,6 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 	//Chevron Icon scroll
 	const ref = useRef(null)
 	const scroll = scrollOffset => {
-		console.log("clicked")
 		ref.current.scrollLeft += scrollOffset
 	}
 
