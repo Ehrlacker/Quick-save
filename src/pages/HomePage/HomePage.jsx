@@ -20,7 +20,6 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 	const [gameSearch, setGameSearch] = useState("")
 	const [gameInputValue, setGameInputValue] = useState("")
 	const [dontCallApiAgain, setDontCallApiAgain] = useState(0)
-	// const [libraryList, setLibraryList] = useState([])
 	const navigate = useNavigate()
 
 	//MustPlayGames api call
@@ -73,7 +72,7 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 		setGameInputValue(newValue)
 	}
 
-	const SearchForGame = () => {
+	const SearchForGame = e => {
 		setGameSearch(gameInputValue)
 		setGameInputValue("")
 		setDontCallApiAgain(0)
@@ -104,10 +103,6 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 			alert(`Warning! ${game.name} already added to Library List`)
 		}
 	}
-
-	// const saveToLocalStorage = items => {
-	// 	localStorage.setItem("video-game-buy-list", JSON.stringify(items))
-	// }
 
 	//Chevron Icon scroll
 	const ref = useRef(null)
@@ -141,9 +136,11 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 								rating={game.rating}
 								addOrRemoveFromBuyList={() => addToBuyList(game)}
 								onClick={() => navigate(`/game/${game.name}`)}
-								addBuyListIcon={<PlusCircleIcon className="hover:text-green-500" />}
+								addBuyListIcon={
+									<PlusCircleIcon className="hover:text-green-500 w-6" />
+								}
 								addLibraryListIcon={
-									<BuildingLibraryIcon className="hover:text-green-500" />
+									<BuildingLibraryIcon className="hover:text-green-500 w-6" />
 								}
 								addOrRemoveFromLibraryList={() => addToLibraryList(game)}
 							/>
@@ -180,9 +177,9 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 							rating={game.rating}
 							addOrRemoveFromBuyList={() => addToBuyList(game)}
 							onClick={() => navigate(`/game/${game.name}`)}
-							addBuyListIcon={<PlusCircleIcon className="hover:text-green-500" />}
+							addBuyListIcon={<PlusCircleIcon className="hover:text-green-500 w-6" />}
 							addLibraryListIcon={
-								<BuildingLibraryIcon className="hover:text-green-500" />
+								<BuildingLibraryIcon className="hover:text-green-500 w-6" />
 							}
 							addOrRemoveFromLibraryList={() => addToLibraryList(game)}
 						/>

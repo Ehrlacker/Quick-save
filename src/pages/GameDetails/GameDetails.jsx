@@ -8,6 +8,7 @@ import "./GameDetails.css"
 import Footer from "../../components/Footer/Footer"
 import {ChevronLeftIcon} from "@heroicons/react/24/solid"
 import {ChevronRightIcon} from "@heroicons/react/24/solid"
+import BackgroundImage from "../../assets/images/ribbon-light-space.jpeg"
 
 const GameDetails = () => {
 	const [game, setGame] = useState([])
@@ -52,7 +53,11 @@ const GameDetails = () => {
 								</h1>
 								<img
 									className="CoverImage w-3/4"
-									src={x.background_image}
+									src={
+										x.background_image === null
+											? BackgroundImage
+											: x.background_image
+									}
 									alt="a game"
 								/>
 

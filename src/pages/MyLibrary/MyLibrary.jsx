@@ -21,7 +21,7 @@ const MyLibraryList = ({libraryList, setLibraryList}) => {
 			<div className="BuyList">
 				<Navbar />
 
-				<div className="BuyGameList w-full flex flex-wrap justify-evenly bg-black mt-16">
+				<div className="BuyGameList w-full flex flex-wrap justify-evenly bg-black mt-16 h-full">
 					{libraryList.map(game => {
 						return (
 							<Game
@@ -31,7 +31,7 @@ const MyLibraryList = ({libraryList, setLibraryList}) => {
 								img={game.background_image}
 								rating={game.rating}
 								addLibraryListIcon={
-									<BuildingLibraryIcon className="hover:text-red-500" />
+									<BuildingLibraryIcon className="hover:text-red-500 w-6" />
 								}
 								addOrRemoveFromLibraryList={() => removeFromLibraryList(game)}
 							/>

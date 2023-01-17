@@ -13,12 +13,9 @@ const SearchBar = props => {
 				onChange={props.onChange}
 				value={props.value}
 				type="text"
-				onKeyPress={props.pressEnter}
 			/>
 		</div>
 	)
 }
 
 export default SearchBar
-
-// w-2/12

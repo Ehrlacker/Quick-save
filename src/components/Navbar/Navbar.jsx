@@ -9,7 +9,7 @@ const Navbar = props => {
 			<div className="w-full">
 				<div className="flex items-center mt-8">
 					<img
-						className="Logo w-[100px] md:w-[200px] rounded-full"
+						className="Logo w-[100px] md:w-[150px] rounded-full"
 						src={Logo}
 						alt="a logo"
 					/>

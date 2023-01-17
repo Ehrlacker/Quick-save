@@ -31,7 +31,9 @@ const BuyList = ({buyList, setBuyList}) => {
 								title={game.name}
 								img={game.background_image}
 								rating={game.rating}
-								addBuyListIcon={<PlusCircleIcon className="hover:text-red-500" />}
+								addBuyListIcon={
+									<PlusCircleIcon className="hover:text-red-500 w-6" />
+								}
 								addOrRemoveFromBuyList={() => removeFromBuyList(game)}
 							/>
 						)
