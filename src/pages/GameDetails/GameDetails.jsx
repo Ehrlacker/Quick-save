@@ -10,7 +10,7 @@ import {ChevronLeftIcon} from "@heroicons/react/24/solid"
 import {ChevronRightIcon} from "@heroicons/react/24/solid"
 import BackgroundImage from "../../assets/images/ribbon-light-space.jpeg"
 
-const GameDetails = () => {
+const GameDetails = ({signedIn}) => {
 	const [game, setGame] = useState([])
 	const {name} = useParams()
 
@@ -39,7 +39,7 @@ const GameDetails = () => {
 	} else {
 		return (
 			<div className="GameDetails block">
-				<Navbar />
+				<Navbar signedIn={signedIn} />
 
 				<div className="GameDetailsPageContainer bg-black w-full">
 					{game.map(x => {

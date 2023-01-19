@@ -3,7 +3,7 @@ import NavItem from "../NavItem/NavItem"
 import Logo from "../../assets/images/Logo.jpg"
 import "./Navbar.css"
 
-const Navbar = props => {
+const Navbar = ({signedIn}) => {
 	return (
 		<div className="Navbar p-8 w-full flex flex-col items-center justify-center">
 			<div className="w-full">
@@ -15,12 +15,18 @@ const Navbar = props => {
 					/>
 					<h1 className="text-5xl text-white ml-8 font-bold md:text-8xl">Quick-Save</h1>
 				</div>
-				<nav className="flex mt-16 items-center">
-					<NavItem page={"/"} title="Home" />
-					<NavItem page={"/BuyList"} title="Buy list" />
-					<NavItem page={"/MyLibrary"} title="My Library" />
-					{/* <NavItem title="Sign in" />
-					<NavItem title="Register" /> */}
+				<nav className="flex mt-16 items-center justify-between">
+					<div className="flex">
+						<NavItem page={"/"} title="Home" />
+						<NavItem page={"/BuyList"} title="Buy list" />
+						<NavItem page={"/MyLibrary"} title="My Library" />
+					</div>
+					<div className="flex">
+						<NavItem page={"/SignIn"} title={signedIn ? "Sign Out" : "Sign In"} />
+						<div style={signedIn ? {display: "none"} : {display: "block"}}>
+							<NavItem title="Register" />
+						</div>
+					</div>
 				</nav>
 			</div>
 		</div>

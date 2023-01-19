@@ -2,9 +2,11 @@ import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
 import Pagination from "../../components/Pagination/Pagination"
 import SearchBar from "../../components/SearchBar/SearchBar"
+// import SignIn from "../../components/SignIn/SignIn"
 import apiKey from "../../apiKey/apiKey"
 import React, {useState, useEffect, useRef} from "react"
 import {useNavigate} from "react-router-dom"
+import {Navigate} from "react-router-dom"
 import {ChevronLeftIcon} from "@heroicons/react/24/solid"
 import {ChevronRightIcon} from "@heroicons/react/24/solid"
 import {PlusCircleIcon} from "@heroicons/react/24/solid"
@@ -13,7 +15,7 @@ import Game from "../../components/Game/Game"
 import BackgroundImage from "../../assets/images/ribbon-light-space.jpeg"
 import "./HomePage.css"
 
-const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
+const HomePage = ({buyList, setBuyList, libraryList, setLibraryList, signedIn}) => {
 	const [mustPlay, setMustPlay] = useState([])
 	const [games, setGames] = useState([])
 	const [pageNumber, setPageNumber] = useState(1)
@@ -93,6 +95,10 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 	}
 
 	const addToBuyList = game => {
+		if (signedIn === false) {
+			alert("Please Sign In")
+			return
+		}
 		const alreadyExists = buyList.some(buy => buy["id"] === game.id)
 		if (alreadyExists === false) {
 			const newBuyList = [...buyList, game]
@@ -104,6 +110,10 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 	}
 
 	const addToLibraryList = game => {
+		if (signedIn === false) {
+			alert("Please Sign In")
+			return
+		}
 		const alreadyExists = libraryList.some(library => library["id"] === game.id)
 		if (alreadyExists === false) {
 			const newLibraryList = [...libraryList, game]
@@ -123,12 +133,11 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 
 	return (
 		<div className="HomePage bg-black w-screen h-full block bg-no-repeat bg-cover">
-			<Navbar />
+			<Navbar signedIn={signedIn} />
 
 			<h1 className="text-white text-5xl font-bold text-center mt-16 mb-8">
 				Must Play Games
 			</h1>
-
 			<div className=" flex w-full h-auto">
 				<ChevronLeftIcon
 					onClick={() => scroll(-400)}
@@ -164,7 +173,6 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 					className="w-16 text-white cursor-pointer"
 				/>
 			</div>
-
 			<h1 className="text-white text-5xl font-bold text-center mt-16 ">Find Games</h1>
 			<div
 				id="slider"
