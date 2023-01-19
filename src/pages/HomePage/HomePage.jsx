@@ -71,7 +71,7 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 		const newValue = e.target.value
 		setGameInputValue(newValue)
 	}
-
+	//Search for game on click
 	const SearchForGame = e => {
 		setGameSearch(gameInputValue)
 		setGameInputValue("")
@@ -79,13 +79,24 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 		setPageNumber(1)
 		console.log(gameInputValue)
 	}
+	//Search for game on Key Press
+	const keyPressSearch = e => {
+		if (e.charCode === 13) {
+			setGameSearch(gameInputValue)
+			setGameInputValue("")
+			setDontCallApiAgain(0)
+			setPageNumber(1)
+			console.log(gameInputValue)
+		} else {
+			return
+		}
+	}
 
 	const addToBuyList = game => {
 		const alreadyExists = buyList.some(buy => buy["id"] === game.id)
 		if (alreadyExists === false) {
 			const newBuyList = [...buyList, game]
 			setBuyList(newBuyList)
-			// saveToLocalStorage(newBuyList)
 			alert(`${game.name} added to Buy List`)
 		} else {
 			alert(`Warning! ${game.name} already added to Buy List`)
@@ -163,6 +174,7 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList}) => {
 					value={gameInputValue}
 					onChange={handleSearchOnChange}
 					onClick={SearchForGame}
+					keySearch={keyPressSearch}
 				/>
 				{games.map(game => {
 					return (

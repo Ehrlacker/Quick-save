@@ -13,6 +13,7 @@ const SearchBar = props => {
 				onChange={props.onChange}
 				value={props.value}
 				type="text"
+				onKeyPress={props.keySearch}
 			/>
 		</div>
 	)
