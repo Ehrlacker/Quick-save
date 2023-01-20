@@ -14,7 +14,7 @@ const App = () => {
 
 	const [libraryList, setLibraryList] = useLocalStorage("libraryList", [])
 
-	const [signedIn, setSignedIn] = useState(false)
+	const [signedIn, setSignedIn] = useState(true)
 
 	return (
 		<div className="App">
