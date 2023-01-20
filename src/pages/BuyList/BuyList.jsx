@@ -4,7 +4,7 @@ import {Navigate} from "react-router-dom"
 import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
 import {PlusCircleIcon} from "@heroicons/react/24/solid"
-import EmptyBuyList from "../../components/EmptyBuyList/EmptyBuyList"
+// import EmptyBuyList from "../../components/EmptyBuyList/EmptyBuyList"
 import "./BuyList.css"
 
 const BuyList = ({buyList, setBuyList, signedIn}) => {
@@ -19,7 +19,15 @@ const BuyList = ({buyList, setBuyList, signedIn}) => {
 		return <Navigate to="/SignIn" />
 	} else {
 		if (buyList.length === 0) {
-			return <EmptyBuyList />
+			// return <EmptyBuyList signedIn={signedIn} />
+			return (
+				<div className="BuyList">
+					<Navbar signedIn={signedIn} />
+					<h1 className="text-white text-5xl text-center font-bold h-screen mt-16">
+						Please Add some games to the Buy list
+					</h1>
+				</div>
+			)
 		} else {
 			return (
 				<div className="BuyList bg-cover bg-no-repeat w-full h-full">

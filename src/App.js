@@ -6,6 +6,7 @@ import GameDetails from "./pages/GameDetails/GameDetails"
 import BuyList from "./pages/BuyList/BuyList"
 import MyLibrary from "./pages/MyLibrary/MyLibrary"
 import SignIn from "./pages/SignIn/SignIn"
+import Register from "./pages/Register/Register"
 import useLocalStorage from "./hooks/useLocalStorage"
 
 const App = () => {
@@ -13,7 +14,7 @@ const App = () => {
 
 	const [libraryList, setLibraryList] = useLocalStorage("libraryList", [])
 
-	const [signedIn, setSignedIn] = useState(true)
+	const [signedIn, setSignedIn] = useState(false)
 
 	return (
 		<div className="App">
@@ -50,6 +51,10 @@ const App = () => {
 				<Route
 					path="/SignIn"
 					element={<SignIn signedIn={signedIn} setSignedIn={setSignedIn} />}
+				/>
+				<Route
+					path="/Register"
+					element={<Register signedIn={signedIn} setSignedIn={setSignedIn} />}
 				/>
 			</Routes>
 		</div>

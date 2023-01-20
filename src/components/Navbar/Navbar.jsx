@@ -24,7 +24,7 @@ const Navbar = ({signedIn}) => {
 					<div className="flex">
 						<NavItem page={"/SignIn"} title={signedIn ? "Sign Out" : "Sign In"} />
 						<div style={signedIn ? {display: "none"} : {display: "block"}}>
-							<NavItem title="Register" />
+							<NavItem page={"/Register"} title="Register" />
 						</div>
 					</div>
 				</nav>

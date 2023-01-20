@@ -19,7 +19,14 @@ const MyLibraryList = ({libraryList, setLibraryList, signedIn}) => {
 		return <Navigate to="/SignIn" />
 	} else {
 		if (libraryList.length === 0) {
-			return <EmptylibraryList />
+			return (
+				<div className="BuyList">
+					<Navbar signedIn={signedIn} />
+					<h1 className="text-white text-5xl text-center font-bold h-screen mt-16">
+						Please Add some games to the Buy list
+					</h1>
+				</div>
+			)
 		} else {
 			return (
 				<div className="BuyList">
