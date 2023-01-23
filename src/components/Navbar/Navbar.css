@@ -5,3 +5,20 @@
     background-position: center;
 width: 100vw;
 }
+
+.bars4Icon{
+display: none;
+}
+
+
+
+@media (max-width: 575px) {
+
+    .navBarListItems{
+        flex-direction: column;
+        margin-top: 2rem;
+        
+    }
+
+ 
+ }

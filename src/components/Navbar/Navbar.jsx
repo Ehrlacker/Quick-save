@@ -1,9 +1,12 @@
-import React from "react"
+import React, {useRef} from "react"
 import NavItem from "../NavItem/NavItem"
 import Logo from "../../assets/images/Logo.jpg"
+
 import "./Navbar.css"
 
 const Navbar = ({signedIn}) => {
+	const ref = useRef(null)
+
 	return (
 		<div className="Navbar p-8 w-full flex flex-col items-center justify-center">
 			<div className="w-full">
@@ -15,15 +18,20 @@ const Navbar = ({signedIn}) => {
 					/>
 					<h1 className="text-4xl text-white ml-4 font-bold md:text-8xl">Quick-Save</h1>
 				</div>
-				<nav className="flex mt-16 items-center justify-between">
+
+				<nav className="navBarListItems flex mt-16 items-center justify-between">
 					<div className="flex">
 						<NavItem page={"/"} title="Home" />
 						<NavItem page={"/BuyList"} title="Buy list" />
 						<NavItem page={"/MyLibrary"} title="My Library" />
 					</div>
-					<div className="flex">
+					<div className="flex" ref={ref}>
 						<NavItem page={"/SignIn"} title={signedIn ? "Sign Out" : "Sign In"} />
-						<div style={signedIn ? {display: "none"} : {display: "block"}}>
+						<div
+							style={
+								signedIn ? {display: "none"} : {display: "block", marginRight: 10}
+							}
+						>
 							<NavItem page={"/Register"} title="Register" />
 						</div>
 					</div>
