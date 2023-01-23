@@ -1,5 +1,6 @@
 import React, {useState} from "react"
 import Navbar from "../../components/Navbar/Navbar"
+import RegisterInput from "../../components/RegisterInput/RegisterInput"
 import {Navigate} from "react-router-dom"
 
 const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
@@ -18,7 +19,7 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 		})
 	}
 
-	const submitCredentials = e => {
+	const submitCredentials = () => {
 		fetch("http://localhost:3002/register", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
@@ -32,8 +33,8 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 		})
 			.then(response => response.json())
 			.then(user => {
+				console.log(user)
 				if (user) {
-					// addUser(user)
 					setUserProfile(prevValue => {
 						return [...prevValue, user]
 					})
@@ -54,110 +55,50 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 				<div className="FORM p-4 w-4/5 max-w-sm bg-white rounded-md">
 					<h1 className="text-center text-black text-4xl font-bold mb-4">Register</h1>
 
-					<div className=" w-11/12 md:flex md:items-center mb-6">
-						<div className="md:w-1/3">
-							<label
-								className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-								htmlFor="inline-first-name"
-							>
-								First Name
-							</label>
-						</div>
-						<div className="md:w-2/3">
-							<input
-								className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-								id="registerFirstName"
-								type="text"
-								placeholder="First Name"
-								value={registerCredentials.registerFirstName}
-								onChange={handleRegister}
-							/>
-						</div>
-					</div>
+					<RegisterInput
+						title="First Name"
+						id="registerFirstName"
+						type="text"
+						onChange={handleRegister}
+						placeholder="First Name"
+						value={registerCredentials.registerFirstName}
+					/>
 
-					<div className=" w-11/12 md:flex md:items-center mb-6">
-						<div className="md:w-1/3">
-							<label
-								className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-								htmlFor="inline-last-name"
-							>
-								Last Name
-							</label>
-						</div>
-						<div className="md:w-2/3">
-							<input
-								className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-								id="registerLastName"
-								type="text"
-								placeholder="Last Name"
-								value={registerCredentials.registerLastName}
-								onChange={handleRegister}
-							/>
-						</div>
-					</div>
+					<RegisterInput
+						title="Last Name"
+						id="registerLastName"
+						type="text"
+						placeholder="Last Name"
+						onChange={handleRegister}
+						value={registerCredentials.registerLastName}
+					/>
 
-					<div className=" w-11/12 md:flex md:items-center mb-6">
-						<div className="md:w-1/3">
-							<label
-								className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-								htmlFor="inline-username"
-							>
-								Username
-							</label>
-						</div>
-						<div className="md:w-2/3">
-							<input
-								className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-								id="registerUserName"
-								type="text"
-								placeholder="Username"
-								value={registerCredentials.registerUserName}
-								onChange={handleRegister}
-							/>
-						</div>
-					</div>
+					<RegisterInput
+						title="Username"
+						id="registerUserName"
+						type="text"
+						placeholder="Username"
+						onChange={handleRegister}
+						value={registerCredentials.registerUserName}
+					/>
 
-					<div className=" w-11/12 md:flex md:items-center mb-6">
-						<div className="md:w-1/3">
-							<label
-								className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-								htmlFor="inline-email"
-							>
-								email
-							</label>
-						</div>
-						<div className="md:w-2/3">
-							<input
-								className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-								id="registerEmail"
-								type="email"
-								placeholder="email@email.com"
-								value={registerCredentials.registerEmail}
-								onChange={handleRegister}
-							/>
-						</div>
-					</div>
+					<RegisterInput
+						title="email"
+						id="registerEmail"
+						type="email"
+						placeholder="Email"
+						onChange={handleRegister}
+						value={registerCredentials.registerEmail}
+					/>
 
-					<div className="w-11/12 md:flex md:items-center mb-6">
-						<div className="md:w-1/3">
-							<label
-								className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-								htmlFor="inline-password"
-							>
-								Password
-							</label>
-						</div>
-						<div className="md:w-2/3">
-							<input
-								className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-								id="registerPassword"
-								type="password"
-								placeholder="******************"
-								value={registerCredentials.registerPassword}
-								onChange={handleRegister}
-							/>
-						</div>
-					</div>
+					<RegisterInput
+						title="Password"
+						id="registerPassword"
+						type="password"
+						placeholder="******************"
+						onChange={handleRegister}
+						value={registerCredentials.registerPassword}
+					/>
 
 					<div className="md:flex md:items-center">
 						<div className="md:w-1/3"></div>
