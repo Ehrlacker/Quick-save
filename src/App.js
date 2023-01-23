@@ -14,7 +14,18 @@ const App = () => {
 
 	const [libraryList, setLibraryList] = useLocalStorage("libraryList", [])
 
-	const [signedIn, setSignedIn] = useState(true)
+	const [signedIn, setSignedIn] = useState(false)
+	const [userProfile, setUserProfile] = useState([
+		// {
+		// 	id: "",
+		// 	firstName: "",
+		// 	lastName: "",
+		// 	username: "",
+		// 	email: "",
+		// 	password: "",
+		// 	joined: new Date(),
+		// },
+	])
 
 	return (
 		<div className="App">
@@ -54,7 +65,14 @@ const App = () => {
 				/>
 				<Route
 					path="/Register"
-					element={<Register signedIn={signedIn} setSignedIn={setSignedIn} />}
+					element={
+						<Register
+							signedIn={signedIn}
+							setSignedIn={setSignedIn}
+							userProfile={userProfile}
+							setUserProfile={setUserProfile}
+						/>
+					}
 				/>
 			</Routes>
 		</div>

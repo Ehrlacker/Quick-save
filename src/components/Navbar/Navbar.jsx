@@ -13,7 +13,7 @@ const Navbar = ({signedIn}) => {
 						src={Logo}
 						alt="a logo"
 					/>
-					<h1 className="text-5xl text-white ml-8 font-bold md:text-8xl">Quick-Save</h1>
+					<h1 className="text-4xl text-white ml-4 font-bold md:text-8xl">Quick-Save</h1>
 				</div>
 				<nav className="flex mt-16 items-center justify-between">
 					<div className="flex">

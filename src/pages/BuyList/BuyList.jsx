@@ -15,7 +15,7 @@ const BuyList = ({buyList, setBuyList, signedIn}) => {
 		setBuyList(newBuyList)
 	}
 
-	if (signedIn === false) {
+	if (!signedIn) {
 		return <Navigate to="/SignIn" />
 	} else {
 		if (buyList.length === 0) {

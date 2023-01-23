@@ -6,7 +6,7 @@ import SearchBar from "../../components/SearchBar/SearchBar"
 import apiKey from "../../apiKey/apiKey"
 import React, {useState, useEffect, useRef} from "react"
 import {useNavigate} from "react-router-dom"
-import {Navigate} from "react-router-dom"
+// import {Navigate} from "react-router-dom"
 import {ChevronLeftIcon} from "@heroicons/react/24/solid"
 import {ChevronRightIcon} from "@heroicons/react/24/solid"
 import {PlusCircleIcon} from "@heroicons/react/24/solid"
@@ -135,7 +135,7 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList, signedIn}) 
 		<div className="HomePage bg-black w-screen h-full block bg-no-repeat bg-cover">
 			<Navbar signedIn={signedIn} />
 
-			<h1 className="text-white text-5xl font-bold text-center mt-16 mb-8">
+			<h1 className="text-white text-4xl font-bold text-center mt-16 mb-8">
 				Must Play Games
 			</h1>
 			<div className=" flex w-full h-auto">

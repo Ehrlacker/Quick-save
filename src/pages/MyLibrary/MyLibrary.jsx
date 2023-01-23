@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
 import {Navigate} from "react-router-dom"
 import {BuildingLibraryIcon} from "@heroicons/react/24/solid"
-import EmptylibraryList from "../../components/EmptyLibraryList/EmptyLibraryList"
+// import EmptylibraryList from "../../components/EmptyLibraryList/EmptyLibraryList"
 import "./MyLibrary.css"
 
 const MyLibraryList = ({libraryList, setLibraryList, signedIn}) => {
@@ -15,7 +15,7 @@ const MyLibraryList = ({libraryList, setLibraryList, signedIn}) => {
 		setLibraryList(newLibraryList)
 	}
 
-	if (signedIn === false) {
+	if (!signedIn) {
 		return <Navigate to="/SignIn" />
 	} else {
 		if (libraryList.length === 0) {
@@ -23,7 +23,7 @@ const MyLibraryList = ({libraryList, setLibraryList, signedIn}) => {
 				<div className="BuyList">
 					<Navbar signedIn={signedIn} />
 					<h1 className="text-white text-5xl text-center font-bold h-screen mt-16">
-						Please Add some games to the Buy list
+						Please Add some games to the Library list
 					</h1>
 				</div>
 			)
