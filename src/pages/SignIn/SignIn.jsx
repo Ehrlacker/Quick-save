@@ -1,46 +1,22 @@
-import React, {useState, useEffect} from "react"
+import React, {useState} from "react"
 import Navbar from "../../components/Navbar/Navbar"
 import {Navigate} from "react-router-dom"
 import {Link} from "react-router-dom"
 
 const SignIn = ({signedIn, setSignedIn}) => {
-	// const [emailInput, setEmailInput] = useState([])
-	// const [passwordInput, setPasswordInput] = useState([])
-
 	const [signInCredentials, setSignInCredentials] = useState({
 		signInEmail: "",
 		signnInPassword: "",
 	})
-
-	// const handleEmailChange = e => {
-	// 	const newEmail = e.target.value
-	// 	setEmailInput(newEmail)
-	// }
-
-	// const handlePasswordChange = e => {
-	// 	const newPassword = e.target.value
-	// 	setPasswordInput(newPassword)
-	// }
 
 	const handleSignIn = e => {
 		const {id, value} = e.target
 		setSignInCredentials(prevValue => {
 			return {...prevValue, [id]: value}
 		})
-
-		// console.log(signInCredentials)
 	}
 
-	// useEffect(() => {
-	// 	fetch("http//localhost:3002").then(resp => resp.json())
-	// }, [])
-
 	const submitEmailPassword = e => {
-		// setSignInCredentials({
-		// 	signInEmail: "",
-		// 	signnInPassword: "",
-		// })
-
 		fetch("http://localhost:3002/signin", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
