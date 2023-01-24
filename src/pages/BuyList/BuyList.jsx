@@ -6,8 +6,10 @@ import Footer from "../../components/Footer/Footer"
 import {PlusCircleIcon} from "@heroicons/react/24/solid"
 // import EmptyBuyList from "../../components/EmptyBuyList/EmptyBuyList"
 import "./BuyList.css"
+import {useNavigate} from "react-router-dom"
 
 const BuyList = ({buyList, setBuyList, signedIn}) => {
+	const navigate = useNavigate()
 	const removeFromBuyList = game => {
 		const newBuyList = buyList.filter(buyListGame => {
 			return buyListGame.id !== game.id
@@ -46,6 +48,7 @@ const BuyList = ({buyList, setBuyList, signedIn}) => {
 										<PlusCircleIcon className="hover:text-red-500 w-6" />
 									}
 									addOrRemoveFromBuyList={() => removeFromBuyList(game)}
+									onClick={() => navigate(`/game/${game.name}`)}
 								/>
 							)
 						})}

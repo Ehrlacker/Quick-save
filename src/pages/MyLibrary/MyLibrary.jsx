@@ -4,10 +4,12 @@ import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
 import {Navigate} from "react-router-dom"
 import {BuildingLibraryIcon} from "@heroicons/react/24/solid"
+import {useNavigate} from "react-router-dom"
 // import EmptylibraryList from "../../components/EmptyLibraryList/EmptyLibraryList"
 import "./MyLibrary.css"
 
 const MyLibraryList = ({libraryList, setLibraryList, signedIn}) => {
+	const navigate = useNavigate()
 	const removeFromLibraryList = game => {
 		const newLibraryList = libraryList.filter(libraryListGame => {
 			return libraryListGame.id !== game.id
@@ -45,6 +47,7 @@ const MyLibraryList = ({libraryList, setLibraryList, signedIn}) => {
 										<BuildingLibraryIcon className="hover:text-red-500 w-6" />
 									}
 									addOrRemoveFromLibraryList={() => removeFromLibraryList(game)}
+									onClick={() => navigate(`/game/${game.name}`)}
 								/>
 							)
 						})}
