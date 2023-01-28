@@ -4,8 +4,14 @@ import Logo from "../../assets/images/Logo.jpg"
 
 import "./Navbar.css"
 
-const Navbar = ({signedIn}) => {
+const Navbar = ({signedIn, setSignedIn, setUserProfile}) => {
 	const ref = useRef(null)
+	const signOutIfSignedIn = () => {
+		if (signedIn) {
+			setSignedIn(false)
+			setUserProfile([])
+		}
+	}
 
 	return (
 		<div className="Navbar p-8 w-full flex flex-col items-center justify-center">
@@ -26,7 +32,12 @@ const Navbar = ({signedIn}) => {
 						<NavItem page={"/MyLibrary"} title="My Library" />
 					</div>
 					<div className="flex" ref={ref}>
-						<NavItem page={"/SignIn"} title={signedIn ? "Sign Out" : "Sign In"} />
+						<NavItem
+							page={"/SignIn"}
+							title={signedIn ? "Sign Out" : "Sign In"}
+							onClick={signOutIfSignedIn}
+						/>
+
 						<div
 							style={
 								signedIn ? {display: "none"} : {display: "block", marginRight: 10}

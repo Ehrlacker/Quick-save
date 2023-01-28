@@ -35,12 +35,12 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 			.then(response => response.json())
 			.then(user => {
 				console.log(user)
-				if (user) {
-					setUserProfile(prevValue => {
-						return [...prevValue, user]
-					})
-					console.log(userProfile)
-				}
+				// if (user) {
+				// 	setUserProfile(prevValue => {
+				// 		return [...prevValue, user]
+				// 	})
+				// 	console.log(userProfile)
+				// }
 			})
 	}
 

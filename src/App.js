@@ -11,21 +11,9 @@ import useLocalStorage from "./hooks/useLocalStorage"
 
 const App = () => {
 	const [buyList, setBuyList] = useLocalStorage("buyList", [])
-
 	const [libraryList, setLibraryList] = useLocalStorage("libraryList", [])
-
-	const [signedIn, setSignedIn] = useState(true)
-	const [userProfile, setUserProfile] = useState([
-		// {
-		// 	id: "",
-		// 	firstName: "",
-		// 	lastName: "",
-		// 	username: "",
-		// 	email: "",
-		// 	password: "",
-		// 	joined: new Date(),
-		// },
-	])
+	const [signedIn, setSignedIn] = useState(false)
+	const [userProfile, setUserProfile] = useLocalStorage("userProfile", [])
 
 	return (
 		<div className="App">
@@ -39,13 +27,21 @@ const App = () => {
 							buyList={buyList}
 							setBuyList={setBuyList}
 							signedIn={signedIn}
+							userProfile={userProfile}
+							setUserProfile={setUserProfile}
 						/>
 					}
 				/>
 				<Route
 					path="/BuyList"
 					element={
-						<BuyList buyList={buyList} setBuyList={setBuyList} signedIn={signedIn} />
+						<BuyList
+							buyList={buyList}
+							setBuyList={setBuyList}
+							signedIn={signedIn}
+							userProfile={userProfile}
+							setUserProfile={setUserProfile}
+						/>
 					}
 				/>
 				<Route
@@ -55,13 +51,22 @@ const App = () => {
 							libraryList={libraryList}
 							setLibraryList={setLibraryList}
 							signedIn={signedIn}
+							userProfile={userProfile}
+							setUserProfile={setUserProfile}
 						/>
 					}
 				/>
 				<Route path="/Game/:name" element={<GameDetails signedIn={signedIn} />} />
 				<Route
 					path="/SignIn"
-					element={<SignIn signedIn={signedIn} setSignedIn={setSignedIn} />}
+					element={
+						<SignIn
+							signedIn={signedIn}
+							setSignedIn={setSignedIn}
+							userProfile={userProfile}
+							setUserProfile={setUserProfile}
+						/>
+					}
 				/>
 				<Route
 					path="/Register"

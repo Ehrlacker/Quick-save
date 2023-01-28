@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar/Navbar"
 import {Navigate} from "react-router-dom"
 import {Link} from "react-router-dom"
 
-const SignIn = ({signedIn, setSignedIn}) => {
+const SignIn = ({signedIn, setSignedIn, setUserProfile, userProfile}) => {
 	const [signInCredentials, setSignInCredentials] = useState({
 		signInEmail: "",
 		signnInPassword: "",
@@ -27,11 +27,19 @@ const SignIn = ({signedIn, setSignedIn}) => {
 		})
 			.then(response => response.json())
 			.then(data => {
-				if (data === "success") {
-					console.log("successss")
+				if (data) {
+					// if (data === "success")
+					console.log(data)
+					setUserProfile(data)
+					console.log(userProfile)
+
+					setSignedIn(true)
+					return <Navigate to="/" />
 				}
 			})
+		//remove
 		console.log(signInCredentials)
+		console.log(userProfile)
 	}
 
 	if (signedIn) {
