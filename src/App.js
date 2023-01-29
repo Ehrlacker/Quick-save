@@ -12,7 +12,7 @@ import useLocalStorage from "./hooks/useLocalStorage"
 const App = () => {
 	const [buyList, setBuyList] = useLocalStorage("buyList", [])
 	const [libraryList, setLibraryList] = useLocalStorage("libraryList", [])
-	const [signedIn, setSignedIn] = useState(false)
+	const [signedIn, setSignedIn] = useState(true)
 	const [userProfile, setUserProfile] = useLocalStorage("userProfile", [])
 
 	return (

@@ -9,7 +9,7 @@ const Navbar = ({signedIn, setSignedIn, setUserProfile}) => {
 	const signOutIfSignedIn = () => {
 		if (signedIn) {
 			setSignedIn(false)
-			setUserProfile([])
+			setUserProfile("")
 		}
 	}
 
