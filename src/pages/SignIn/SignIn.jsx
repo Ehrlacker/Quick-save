@@ -17,7 +17,7 @@ const SignIn = ({signedIn, setSignedIn, setUserProfile, userProfile}) => {
 		})
 	}
 
-	const submitEmailPassword = e => {
+	const submitEmailPassword = async e => {
 		fetch("http://localhost:3002/signin", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
@@ -30,12 +30,17 @@ const SignIn = ({signedIn, setSignedIn, setUserProfile, userProfile}) => {
 			.then(data => {
 				if (data) {
 					// if (data === "success")
+					setUserProfile("")
 					console.log(data)
+					setUserProfile(prevValue => {
+						return [...prevValue, data]
+					})
+
 					setUserProfile(data)
 					console.log(userProfile)
 
 					setSignedIn(true)
-					return <Navigate to="/" />
+					// return <Navigate to="/" />
 				}
 			})
 		//remove
@@ -44,13 +49,12 @@ const SignIn = ({signedIn, setSignedIn, setUserProfile, userProfile}) => {
 	}
 
 	if (signedIn) {
-		console.log("successss")
 		return <Navigate to="/" />
 	}
 
 	return (
 		<div className="SignIn">
-			<Navbar />
+			{/* <Navbar /> */}
 
 			<div className="w-full flex justify-center items-center mt-32 ">
 				<div className="FORM p-4 w-4/5 max-w-sm bg-white rounded-md">

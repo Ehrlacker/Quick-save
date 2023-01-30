@@ -1,13 +1,12 @@
 import React from "react"
 import {Link} from "react-router-dom"
 
-const NavItem = ({page, onClick, title}) => {
+const NavItem = ({page, onClick, title, description}) => {
 	return (
 		<>
-			<p className="text-lg mr-6 text-white font-bold md:text-3xl">
-				<Link to={page} onClick={onClick}>
-					{title}
-				</Link>
+			<p className="text-lg mr-6 text-white font-bold md:text-3xl" onClick={onClick}>
+				<Link to={page}>{title}</Link>
+				{description}
 			</p>
 		</>
 	)

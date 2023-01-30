@@ -23,7 +23,7 @@ const MyLibraryList = ({libraryList, setLibraryList, signedIn}) => {
 		if (libraryList.length === 0) {
 			return (
 				<div className="BuyList">
-					<Navbar signedIn={signedIn} />
+					{/* <Navbar signedIn={signedIn} /> */}
 					<h1 className="text-white text-5xl text-center font-bold h-screen mt-16">
 						Please Add some games to the Library list
 					</h1>
@@ -32,7 +32,7 @@ const MyLibraryList = ({libraryList, setLibraryList, signedIn}) => {
 		} else {
 			return (
 				<div className="BuyList">
-					<Navbar signedIn={signedIn} />
+					{/* <Navbar signedIn={signedIn} /> */}
 
 					<div className="BuyGameList w-full flex flex-wrap justify-evenly bg-black mt-16 h-full">
 						{libraryList.map(game => {

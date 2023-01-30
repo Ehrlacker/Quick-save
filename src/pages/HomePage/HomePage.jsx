@@ -2,11 +2,9 @@ import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
 import Pagination from "../../components/Pagination/Pagination"
 import SearchBar from "../../components/SearchBar/SearchBar"
-// import SignIn from "../../components/SignIn/SignIn"
 import apiKey from "../../apiKey/apiKey"
 import React, {useState, useEffect, useRef} from "react"
 import {useNavigate} from "react-router-dom"
-// import {Navigate} from "react-router-dom"
 import {ChevronLeftIcon} from "@heroicons/react/24/solid"
 import {ChevronRightIcon} from "@heroicons/react/24/solid"
 import {PlusCircleIcon} from "@heroicons/react/24/solid"
@@ -15,7 +13,15 @@ import Game from "../../components/Game/Game"
 import BackgroundImage from "../../assets/images/ribbon-light-space.jpeg"
 import "./HomePage.css"
 
-const HomePage = ({buyList, setBuyList, libraryList, setLibraryList, signedIn}) => {
+const HomePage = ({
+	buyList,
+	setBuyList,
+	libraryList,
+	setLibraryList,
+	signedIn,
+	userProfile,
+	setUserProfile,
+}) => {
 	const [mustPlay, setMustPlay] = useState([])
 	const [games, setGames] = useState([])
 	const [pageNumber, setPageNumber] = useState(1)
@@ -56,7 +62,6 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList, signedIn}) 
 			})
 		}
 	}
-
 	const previousPage = () => {
 		if (pageNumber <= 1) {
 			return
@@ -118,7 +123,6 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList, signedIn}) 
 		if (alreadyExists === false) {
 			const newLibraryList = [...libraryList, game]
 			setLibraryList(newLibraryList)
-
 			alert(`${game.name} added to library List`)
 		} else {
 			alert(`Warning! ${game.name} already added to Library List`)
@@ -133,7 +137,7 @@ const HomePage = ({buyList, setBuyList, libraryList, setLibraryList, signedIn}) 
 
 	return (
 		<div className="HomePage bg-black w-screen h-full block bg-no-repeat bg-cover">
-			<Navbar signedIn={signedIn} />
+			{/* <Navbar signedIn={signedIn} /> */}
 
 			<h1 className="text-white text-4xl font-bold text-center mt-16 mb-8">
 				Must Play Games

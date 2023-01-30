@@ -50,7 +50,7 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 
 	return (
 		<div className="SignIn">
-			<Navbar />
+			{/* <Navbar /> */}
 
 			<div className="w-full flex justify-center items-center mt-32 ">
 				<div className="FORM p-4 w-4/5 max-w-sm bg-white rounded-md">

@@ -7,16 +7,18 @@ import BuyList from "./pages/BuyList/BuyList"
 import MyLibrary from "./pages/MyLibrary/MyLibrary"
 import SignIn from "./pages/SignIn/SignIn"
 import Register from "./pages/Register/Register"
+import Navbar from "./components/Navbar/Navbar"
 import useLocalStorage from "./hooks/useLocalStorage"
 
 const App = () => {
 	const [buyList, setBuyList] = useLocalStorage("buyList", [])
 	const [libraryList, setLibraryList] = useLocalStorage("libraryList", [])
-	const [signedIn, setSignedIn] = useState(true)
+	const [signedIn, setSignedIn] = useState(false)
 	const [userProfile, setUserProfile] = useLocalStorage("userProfile", [])
 
 	return (
 		<div className="App">
+			<Navbar signedIn={signedIn} setSignedIn={setSignedIn} setUserProfile={setUserProfile} />
 			<Routes>
 				<Route
 					path="/"
@@ -29,6 +31,7 @@ const App = () => {
 							signedIn={signedIn}
 							userProfile={userProfile}
 							setUserProfile={setUserProfile}
+							setSignedIn={setSignedIn}
 						/>
 					}
 				/>
@@ -41,6 +44,7 @@ const App = () => {
 							signedIn={signedIn}
 							userProfile={userProfile}
 							setUserProfile={setUserProfile}
+							setSignedIn={setSignedIn}
 						/>
 					}
 				/>
@@ -53,6 +57,7 @@ const App = () => {
 							signedIn={signedIn}
 							userProfile={userProfile}
 							setUserProfile={setUserProfile}
+							setSignedIn={setSignedIn}
 						/>
 					}
 				/>

@@ -1,17 +1,20 @@
 import React, {useRef} from "react"
 import NavItem from "../NavItem/NavItem"
 import Logo from "../../assets/images/Logo.jpg"
+import SignOut from "../../components/SignOut/SignOut"
 
 import "./Navbar.css"
 
-const Navbar = ({signedIn, setSignedIn, setUserProfile}) => {
+const Navbar = ({signedIn, setSignedIn, setUserProfile, userProfile}) => {
 	const ref = useRef(null)
+
 	const signOutIfSignedIn = () => {
-		if (signedIn) {
-			setSignedIn(false)
-			setUserProfile("")
-		}
+		setSignedIn(false)
+		setUserProfile([])
+		console.log("signed outtttttttttttt")
+		console.log(signedIn)
 	}
+	console.log(signedIn)
 
 	return (
 		<div className="Navbar p-8 w-full flex flex-col items-center justify-center">
@@ -32,11 +35,12 @@ const Navbar = ({signedIn, setSignedIn, setUserProfile}) => {
 						<NavItem page={"/MyLibrary"} title="My Library" />
 					</div>
 					<div className="flex" ref={ref}>
-						<NavItem
-							page={"/SignIn"}
-							title={signedIn ? "Sign Out" : "Sign In"}
-							onClick={signOutIfSignedIn}
-						/>
+						<div style={signedIn ? {display: "none"} : {display: "block"}}>
+							<NavItem page={"/SignIn"} title="Sign In" />
+						</div>
+						<div style={signedIn ? {display: "block"} : {display: "none"}}>
+							<SignOut title="Sign Out" onClick={signOutIfSignedIn} />
+						</div>
 
 						<div
 							style={
@@ -53,3 +57,4 @@ const Navbar = ({signedIn, setSignedIn, setUserProfile}) => {
 }
 
 export default Navbar
+//style={signedIn ? {display: "block"} : {display: "none"}}
