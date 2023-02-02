@@ -10,6 +10,7 @@ import {BuildingLibraryIcon} from "@heroicons/react/24/solid"
 import Game from "../../components/Game/Game"
 import BackgroundImage from "../../assets/images/ribbon-light-space.jpeg"
 import "./HomePage.css"
+//
 
 const HomePage = ({
 	buyList,
