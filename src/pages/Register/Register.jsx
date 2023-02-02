@@ -6,9 +6,9 @@ import {Navigate} from "react-router-dom"
 const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 	const [registerCredentials, setRegisterCredentials] = useState({
 		registerFirstName: "",
-		registerLastName: "",
+		// registerLastName: "",
 		registerUserName: "",
-		registerEmail: "",
+		// registerEmail: "",
 		registerPassword: "",
 	})
 
@@ -27,9 +27,9 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 				headers: {"Content-Type": "application/json"},
 				body: JSON.stringify({
 					firstName: registerCredentials.registerFirstName,
-					lastName: registerCredentials.registerLastName,
+					// lastName: registerCredentials.registerLastName,
 					username: registerCredentials.registerUserName,
-					email: registerCredentials.registerEmail,
+					// email: registerCredentials.registerEmail,
 					password: registerCredentials.registerPassword,
 				}),
 			})
@@ -39,7 +39,7 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 					console.log(user)
 				})
 		} catch (error) {
-			console.log(error)
+			console.log("yesss", error)
 		}
 	}
 
@@ -62,14 +62,14 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 						value={registerCredentials.registerFirstName}
 					/>
 
-					<RegisterInput
+					{/* <RegisterInput
 						title="Last Name"
 						id="registerLastName"
 						type="text"
 						placeholder="Last Name"
 						onChange={handleRegister}
 						value={registerCredentials.registerLastName}
-					/>
+					/> */}
 
 					<RegisterInput
 						title="Username"
@@ -80,14 +80,14 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 						value={registerCredentials.registerUserName}
 					/>
 
-					<RegisterInput
+					{/* <RegisterInput
 						title="email"
 						id="registerEmail"
 						type="email"
 						placeholder="Email"
 						onChange={handleRegister}
 						value={registerCredentials.registerEmail}
-					/>
+					/> */}
 
 					<RegisterInput
 						title="Password"

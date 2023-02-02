@@ -13,7 +13,7 @@ const SignIn = ({
 	setLibraryList,
 }) => {
 	const [signInCredentials, setSignInCredentials] = useState({
-		signInEmail: "",
+		signInUsername: "",
 		signnInPassword: "",
 	})
 
@@ -26,38 +26,35 @@ const SignIn = ({
 
 	const submitEmailPassword = async () => {
 		console.log(userProfile)
-		fetch("http://localhost:3002/signin", {
-			method: "post",
-			headers: {"Content-Type": "application/json"},
-			body: JSON.stringify({
-				email: signInCredentials.signInEmail,
-				password: signInCredentials.signnInPassword,
-			}),
-		})
-			.then(response => response.json())
-			.then(data => {
-				if (data) {
-					// if (data === "success")
-					// setUserProfile("")
-					// console.log(data)
-					// setUserProfile(prevValue => {
-					// 	return [...prevValue, data]
-					// })
-					console.log(data)
-
-					// if (data.buyList[0].buyList.length !== 0) {
-					// 	setBuyList(data.buyList[0].buyList)
-					// }
-
-					setBuyList(data.buyList[0].buyList)
-					setLibraryList(data.libraryList[0].libraryList)
-					setUserProfile(data)
-					setSignedIn(true)
-				}
+		try {
+			fetch("http://localhost:3002/signin", {
+				method: "post",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify({
+					email: signInCredentials.signInUsername,
+					password: signInCredentials.signnInPassword,
+				}),
 			})
-		//remove
-		console.log(signInCredentials)
-		console.log(userProfile)
+				.then(response => response.json())
+				.then(data => {
+					if (data) {
+						console.log(data)
+
+						setBuyList(data.buyList[0].buyList)
+						setLibraryList(data.libraryList[0].libraryList)
+						setUserProfile(data)
+						setSignedIn(true)
+					}
+				})
+			// .catch(err => {
+			// 	console.log("yessssss", err)
+			// })
+			//remove
+			console.log(signInCredentials)
+			console.log(userProfile)
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	if (signedIn) {
@@ -73,12 +70,12 @@ const SignIn = ({
 					<h1 className="text-center text-black text-4xl font-bold mb-4">Sign In</h1>
 
 					<SignInInput
-						id="signInEmail"
+						id="signInUsername"
 						onChange={handleSignIn}
-						placeholder="email@email.com"
-						label="Email"
-						value={signInCredentials.emailInput}
-						type="email"
+						placeholder="username"
+						label="Username"
+						value={signInCredentials.usernameInput}
+						type="string"
 					/>
 					<SignInInput
 						id="signnInPassword"
