@@ -1,5 +1,4 @@
 import React, {useState} from "react"
-import Navbar from "../../components/Navbar/Navbar"
 import RegisterInput from "../../components/RegisterInput/RegisterInput"
 import RegisterButton from "../../components/RegisterButton/RegisterButton"
 import {Navigate} from "react-router-dom"
@@ -21,27 +20,27 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 	}
 
 	const submitCredentials = () => {
-		fetch("http://localhost:3002/register", {
-			method: "post",
-			headers: {"Content-Type": "application/json"},
-			body: JSON.stringify({
-				firstName: registerCredentials.registerFirstName,
-				lastName: registerCredentials.registerLastName,
-				username: registerCredentials.registerUserName,
-				email: registerCredentials.registerEmail,
-				password: registerCredentials.registerPassword,
-			}),
-		})
-			.then(response => response.json())
-			.then(user => {
-				console.log(user)
-				// if (user) {
-				// 	setUserProfile(prevValue => {
-				// 		return [...prevValue, user]
-				// 	})
-				// 	console.log(userProfile)
-				// }
+		try {
+			console.log("workssss")
+			fetch("http://localhost:3002/register", {
+				method: "post",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify({
+					firstName: registerCredentials.registerFirstName,
+					lastName: registerCredentials.registerLastName,
+					username: registerCredentials.registerUserName,
+					email: registerCredentials.registerEmail,
+					password: registerCredentials.registerPassword,
+				}),
 			})
+				.then(response => response.json())
+				.then(user => {
+					console.log("ttttttt")
+					console.log(user)
+				})
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	if (signedIn) {
@@ -50,8 +49,6 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 
 	return (
 		<div className="SignIn">
-			{/* <Navbar /> */}
-
 			<div className="w-full flex justify-center items-center mt-32 ">
 				<div className="FORM p-4 w-4/5 max-w-sm bg-white rounded-md">
 					<h1 className="text-center text-black text-4xl font-bold mb-4">Register</h1>

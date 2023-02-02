@@ -1,10 +1,17 @@
 import React, {useState} from "react"
-import Navbar from "../../components/Navbar/Navbar"
 import SignInInput from "../../components/SingInInput/SignInInput"
 import {Navigate} from "react-router-dom"
 import {Link} from "react-router-dom"
 
-const SignIn = ({signedIn, setSignedIn, setUserProfile, userProfile}) => {
+const SignIn = ({
+	signedIn,
+	setSignedIn,
+	setUserProfile,
+	userProfile,
+	setBuyList,
+	libraryList,
+	setLibraryList,
+}) => {
 	const [signInCredentials, setSignInCredentials] = useState({
 		signInEmail: "",
 		signnInPassword: "",
@@ -17,7 +24,8 @@ const SignIn = ({signedIn, setSignedIn, setUserProfile, userProfile}) => {
 		})
 	}
 
-	const submitEmailPassword = async e => {
+	const submitEmailPassword = async () => {
+		console.log(userProfile)
 		fetch("http://localhost:3002/signin", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
@@ -30,17 +38,21 @@ const SignIn = ({signedIn, setSignedIn, setUserProfile, userProfile}) => {
 			.then(data => {
 				if (data) {
 					// if (data === "success")
-					setUserProfile("")
+					// setUserProfile("")
+					// console.log(data)
+					// setUserProfile(prevValue => {
+					// 	return [...prevValue, data]
+					// })
 					console.log(data)
-					setUserProfile(prevValue => {
-						return [...prevValue, data]
-					})
 
+					// if (data.buyList[0].buyList.length !== 0) {
+					// 	setBuyList(data.buyList[0].buyList)
+					// }
+
+					setBuyList(data.buyList[0].buyList)
+					setLibraryList(data.libraryList[0].libraryList)
 					setUserProfile(data)
-					console.log(userProfile)
-
 					setSignedIn(true)
-					// return <Navigate to="/" />
 				}
 			})
 		//remove

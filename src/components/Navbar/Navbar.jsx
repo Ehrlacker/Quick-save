@@ -5,20 +5,23 @@ import SignOut from "../../components/SignOut/SignOut"
 
 import "./Navbar.css"
 
-const Navbar = ({signedIn, setSignedIn, setUserProfile, userProfile}) => {
+const Navbar = ({signedIn, setSignedIn, setUserProfile, userProfile, setBuyList}) => {
 	const ref = useRef(null)
 
 	const signOutIfSignedIn = () => {
 		setSignedIn(false)
 		setUserProfile([])
-		console.log("signed outtttttttttttt")
-		console.log(signedIn)
 	}
-	console.log(signedIn)
 
 	return (
 		<div className="Navbar p-8 w-full flex flex-col items-center justify-center">
 			<div className="w-full">
+				{/* <div
+					className="text-white text-3xl font-bold text-end "
+					style={userProfile.length === 0 ? {display: "none"} : {display: "block"}}
+				>
+					Hello {userProfile ? userProfile.username : ""}
+				</div> */}
 				<div className="flex items-center mt-8">
 					<img
 						className="Logo w-[100px] md:w-[150px] rounded-full"
@@ -57,4 +60,3 @@ const Navbar = ({signedIn, setSignedIn, setUserProfile, userProfile}) => {
 }
 
 export default Navbar
-//style={signedIn ? {display: "block"} : {display: "none"}}

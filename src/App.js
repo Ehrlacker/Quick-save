@@ -1,6 +1,5 @@
 import {Routes, Route} from "react-router-dom"
 import "./App.css"
-import {useState} from "react"
 import Homepage from "./pages/HomePage/HomePage"
 import GameDetails from "./pages/GameDetails/GameDetails"
 import BuyList from "./pages/BuyList/BuyList"
@@ -13,12 +12,18 @@ import useLocalStorage from "./hooks/useLocalStorage"
 const App = () => {
 	const [buyList, setBuyList] = useLocalStorage("buyList", [])
 	const [libraryList, setLibraryList] = useLocalStorage("libraryList", [])
-	const [signedIn, setSignedIn] = useState(true)
+	const [signedIn, setSignedIn] = useLocalStorage("signedIn", false)
 	const [userProfile, setUserProfile] = useLocalStorage("userProfile", [])
 
 	return (
 		<div className="App">
-			<Navbar signedIn={signedIn} setSignedIn={setSignedIn} setUserProfile={setUserProfile} />
+			<Navbar
+				signedIn={signedIn}
+				setSignedIn={setSignedIn}
+				userProfile={userProfile}
+				setUserProfile={setUserProfile}
+				setBuyList={setBuyList}
+			/>
 			<Routes>
 				<Route
 					path="/"
@@ -70,6 +75,9 @@ const App = () => {
 							setSignedIn={setSignedIn}
 							userProfile={userProfile}
 							setUserProfile={setUserProfile}
+							setBuyList={setBuyList}
+							libraryList={libraryList}
+							setLibraryList={setLibraryList}
 						/>
 					}
 				/>

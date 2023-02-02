@@ -1,8 +1,6 @@
-import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
 import Pagination from "../../components/Pagination/Pagination"
 import SearchBar from "../../components/SearchBar/SearchBar"
-import apiKey from "../../apiKey/apiKey"
 import React, {useState, useEffect, useRef} from "react"
 import {useNavigate} from "react-router-dom"
 import {ChevronLeftIcon} from "@heroicons/react/24/solid"
@@ -39,7 +37,7 @@ const HomePage = ({
 
 	//FindGames api call
 	const getGamesList = async () => {
-		const url = `https://api.rawg.io/api/games?key=${apiKey}&page_size=18&page=${pageNumber}&search=${gameSearch}&search_precise=true`
+		const url = `https://api.rawg.io/api/games?key=${process.env.REACT_APP_apikey}&page_size=18&page=${pageNumber}&search=${gameSearch}&search_precise=true`
 		const response = await fetch(url)
 		const resJSON = await response.json()
 		console.log(resJSON.results)
@@ -114,6 +112,28 @@ const HomePage = ({
 		}
 	}
 
+	const updateBuyList = async () => {
+		if (userProfile.length === 0) {
+			return
+		}
+		await fetch("http://localhost:3002/buyList", {
+			method: "post",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify([{userProfile}, {buyList}]),
+		})
+			.then(response => response.json())
+			.then(data => {
+				if (data) {
+					setUserProfile(data)
+					// setBuyList(data.buyList[0].buyList)
+				}
+			})
+	}
+
+	useEffect(() => {
+		updateBuyList()
+	}, [buyList])
+
 	const addToLibraryList = game => {
 		if (signedIn === false) {
 			alert("Please Sign In")
@@ -128,6 +148,28 @@ const HomePage = ({
 			alert(`Warning! ${game.name} already added to Library List`)
 		}
 	}
+
+	const updateLibraryList = async () => {
+		if (userProfile.length === 0) {
+			return
+		}
+		await fetch("http://localhost:3002/libraryList", {
+			method: "post",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify([{userProfile}, {libraryList}]),
+		})
+			.then(response => response.json())
+			.then(data => {
+				if (data) {
+					setUserProfile(data)
+					// setBuyList(data.buyList[0].buyList)
+				}
+			})
+	}
+
+	useEffect(() => {
+		updateLibraryList()
+	}, [libraryList])
 
 	//Chevron Icon scroll
 	const ref = useRef(null)

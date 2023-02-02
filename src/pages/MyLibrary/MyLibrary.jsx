@@ -1,6 +1,5 @@
-import React from "react"
+import React, {useEffect} from "react"
 import Game from "../../components/Game/Game"
-import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
 import {Navigate} from "react-router-dom"
 import {BuildingLibraryIcon} from "@heroicons/react/24/solid"
@@ -8,14 +7,38 @@ import {useNavigate} from "react-router-dom"
 // import EmptylibraryList from "../../components/EmptyLibraryList/EmptyLibraryList"
 import "./MyLibrary.css"
 
-const MyLibraryList = ({libraryList, setLibraryList, signedIn}) => {
+const MyLibraryList = ({libraryList, setLibraryList, signedIn, userProfile, setUserProfile}) => {
 	const navigate = useNavigate()
+
 	const removeFromLibraryList = game => {
 		const newLibraryList = libraryList.filter(libraryListGame => {
 			return libraryListGame.id !== game.id
 		})
 		setLibraryList(newLibraryList)
 	}
+
+	const updateLibraryList = async () => {
+		if (userProfile.length === 0) {
+			return
+		}
+		await fetch("http://localhost:3002/libraryList", {
+			method: "post",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify([{userProfile}, {libraryList}]),
+		})
+			.then(response => response.json())
+			.then(data => {
+				if (data) {
+					console.log(data)
+					setUserProfile(data)
+					// setBuyList(data.buyList[0].buyList)
+				}
+			})
+	}
+
+	useEffect(() => {
+		updateLibraryList()
+	}, [libraryList])
 
 	if (!signedIn) {
 		return <Navigate to="/SignIn" />

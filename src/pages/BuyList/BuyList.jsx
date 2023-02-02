@@ -1,15 +1,15 @@
-import React from "react"
+import React, {useEffect} from "react"
 import Game from "../../components/Game/Game"
 import {Navigate} from "react-router-dom"
-import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
 import {PlusCircleIcon} from "@heroicons/react/24/solid"
 // import EmptyBuyList from "../../components/EmptyBuyList/EmptyBuyList"
 import "./BuyList.css"
 import {useNavigate} from "react-router-dom"
 
-const BuyList = ({buyList, setBuyList, signedIn}) => {
+const BuyList = ({buyList, setBuyList, signedIn, userProfile, setUserProfile}) => {
 	const navigate = useNavigate()
+
 	const removeFromBuyList = game => {
 		const newBuyList = buyList.filter(buyListGame => {
 			return buyListGame.id !== game.id
@@ -17,11 +17,33 @@ const BuyList = ({buyList, setBuyList, signedIn}) => {
 		setBuyList(newBuyList)
 	}
 
+	const updateBuyList = async () => {
+		if (userProfile.length === 0) {
+			return
+		}
+		await fetch("http://localhost:3002/buyList", {
+			method: "post",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify([{userProfile}, {buyList}]),
+		})
+			.then(response => response.json())
+			.then((data, err) => {
+				if (data) {
+					console.log(data)
+					setUserProfile(data)
+					// setBuyList(data.buyList[0].buyList)
+				}
+			})
+	}
+
+	useEffect(() => {
+		updateBuyList()
+	}, [buyList])
+
 	if (!signedIn) {
 		return <Navigate to="/SignIn" />
 	} else {
 		if (buyList.length === 0) {
-			// return <EmptyBuyList signedIn={signedIn} />
 			return (
 				<div className="BuyList">
 					{/* <Navbar signedIn={signedIn} /> */}
@@ -47,7 +69,11 @@ const BuyList = ({buyList, setBuyList, signedIn}) => {
 									addBuyListIcon={
 										<PlusCircleIcon className="hover:text-red-500 w-6" />
 									}
-									addOrRemoveFromBuyList={() => removeFromBuyList(game)}
+									// addOrRemoveFromBuyList={() => removeFromBuyList(game)}
+									addOrRemoveFromBuyList={async () => {
+										removeFromBuyList(game)
+										// updateBuyList(game)
+									}}
 									onClick={() => navigate(`/game/${game.name}`)}
 								/>
 							)

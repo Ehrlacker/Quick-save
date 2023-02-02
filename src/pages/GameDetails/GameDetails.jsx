@@ -1,9 +1,7 @@
 import React, {useState, useEffect, useRef} from "react"
-import Navbar from "../../components/Navbar/Navbar"
 import EmptyGameDetails from "../../components/EmptyGameDetails/EmptyGameDetails"
 import {useParams} from "react-router-dom"
 import axios from "axios"
-import apiKey from "../../apiKey/apiKey"
 import "./GameDetails.css"
 import Footer from "../../components/Footer/Footer"
 import {ChevronLeftIcon} from "@heroicons/react/24/solid"
@@ -17,7 +15,7 @@ const GameDetails = ({signedIn}) => {
 	useEffect(() => {
 		axios
 			.get(
-				`https://api.rawg.io/api/games?key=${apiKey}&page_size=1&search_exact=true&search=${name}`,
+				`https://api.rawg.io/api/games?key=${process.env.REACT_APP_apikey}&page_size=1&search_exact=true&search=${name}`,
 			)
 			.then(res => {
 				console.log(res.data)
@@ -39,7 +37,7 @@ const GameDetails = ({signedIn}) => {
 	} else {
 		return (
 			<div className="GameDetails block">
-				<Navbar signedIn={signedIn} />
+				{/* <Navbar signedIn={signedIn} /> */}
 
 				<div className="GameDetailsPageContainer bg-black w-full">
 					{game.map(x => {
