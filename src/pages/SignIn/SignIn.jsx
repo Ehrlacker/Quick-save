@@ -68,8 +68,8 @@ const SignIn = ({
 				.then(data => {
 					if (data) {
 						console.log(data)
-						// setBuyList(data.buyList[0].buyList)
-						// setLibraryList(data.libraryList[0].libraryList)
+						setBuyList(data.buyList)
+						setLibraryList(data.libraryList)
 
 						// if (data.buyList.length !== 0) {
 						// 	setBuyList(data.buyList[0].buyList)
