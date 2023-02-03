@@ -6,6 +6,7 @@ import {PlusCircleIcon} from "@heroicons/react/24/solid"
 // import EmptyBuyList from "../../components/EmptyBuyList/EmptyBuyList"
 import "./BuyList.css"
 import {useNavigate} from "react-router-dom"
+import axios from "axios"
 
 const BuyList = ({buyList, setBuyList, signedIn, userProfile, setUserProfile}) => {
 	const navigate = useNavigate()
@@ -21,6 +22,25 @@ const BuyList = ({buyList, setBuyList, signedIn, userProfile, setUserProfile}) =
 		if (userProfile.length === 0) {
 			return
 		}
+
+		// const url = "http://localhost:3002/buyList"
+		// const config = {headers: {"Content-Type": "application/json"}}
+		// const data = {body: JSON.stringify([{userProfile}, {buyList}])}
+
+		// try {
+		// 	axios
+		// 		.post(url, config, data)
+		// 		.then(response => response.json())
+		// 		.then(data => {
+		// 			if (data) {
+		// 				console.log(data)
+		// 				setUserProfile(data)
+		// 			}
+		// 		})
+		// } catch (error) {
+		// 	console.log(error)
+		// }
+
 		await fetch("http://localhost:3002/buyList", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},

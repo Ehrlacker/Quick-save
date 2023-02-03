@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import SignInInput from "../../components/SingInInput/SignInInput"
 import {Navigate} from "react-router-dom"
 import {Link} from "react-router-dom"
+import axios from "axios"
 
 const SignIn = ({
 	signedIn,
@@ -25,13 +26,41 @@ const SignIn = ({
 	}
 
 	const submitEmailPassword = async () => {
+		console.log(signInCredentials)
 		console.log(userProfile)
+		// const url = "http://localhost:3002/buyList"
+		// const config = {headers: {"Content-Type": "application/json"}}
+		// const data = {
+		// 	body: JSON.stringify({
+		// 		username: signInCredentials.signInUsername,
+		// 		password: signInCredentials.signnInPassword,
+		// 	}),
+		// }
+		// try {
+		// 	console.log(signInCredentials)
+		// 	axios
+		// 		.post(url, config, data)
+		// 		.then(response => response.json())
+		// 		.then(data => {
+		// 			if (data) {
+		// 				console.log(data)
+
+		// 				setBuyList(data.buyList[0].buyList)
+		// 				setLibraryList(data.libraryList[0].libraryList)
+		// 				setUserProfile(data)
+		// 				setSignedIn(true)
+		// 			}
+		// 		})
+		// } catch (error) {
+		// 	console.log(error)
+		// }
+
 		try {
 			fetch("http://localhost:3002/signin", {
 				method: "post",
 				headers: {"Content-Type": "application/json"},
 				body: JSON.stringify({
-					email: signInCredentials.signInUsername,
+					username: signInCredentials.signInUsername,
 					password: signInCredentials.signnInPassword,
 				}),
 			})
@@ -39,7 +68,6 @@ const SignIn = ({
 				.then(data => {
 					if (data) {
 						console.log(data)
-
 						setBuyList(data.buyList[0].buyList)
 						setLibraryList(data.libraryList[0].libraryList)
 						setUserProfile(data)
@@ -113,3 +141,15 @@ const SignIn = ({
 }
 
 export default SignIn
+
+// if (data.buyList !== 0) {
+// 	setBuyList(data.buyList[0].buyList)
+// } else {
+// 	return
+// }
+
+// if (data.libraryList !== 0) {
+// 	setLibraryList(data.libraryList[0].libraryList)
+// } else {
+// 	return
+// }

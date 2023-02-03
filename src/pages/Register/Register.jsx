@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import RegisterInput from "../../components/RegisterInput/RegisterInput"
 import RegisterButton from "../../components/RegisterButton/RegisterButton"
 import {Navigate} from "react-router-dom"
+import axios from "axios"
 
 const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 	const [registerCredentials, setRegisterCredentials] = useState({
@@ -20,6 +21,26 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 	}
 
 	const submitCredentials = () => {
+		// const url = "http://localhost:3002/buyList"
+		// const config = {headers: {"Content-Type": "application/json"}}
+		// const data = {
+		// 	body: JSON.stringify({
+		// 		firstName: registerCredentials.registerFirstName,
+		// 		username: registerCredentials.registerUserName,
+		// 		password: registerCredentials.registerPassword,
+		// 	}),
+		// }
+		// try {
+		// 	axios
+		// 		.post(url, config, data)
+		// 		.then(response => response.json())
+		// 		.then(user => {
+		// 			console.log("ttttttt")
+		// 			console.log(user)
+		// 		})
+		// } catch (error) {
+		// 	console.log(error)
+		// }
 		try {
 			console.log("workssss")
 			fetch("http://localhost:3002/register", {
@@ -62,15 +83,6 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 						value={registerCredentials.registerFirstName}
 					/>
 
-					{/* <RegisterInput
-						title="Last Name"
-						id="registerLastName"
-						type="text"
-						placeholder="Last Name"
-						onChange={handleRegister}
-						value={registerCredentials.registerLastName}
-					/> */}
-
 					<RegisterInput
 						title="Username"
 						id="registerUserName"
@@ -79,15 +91,6 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 						onChange={handleRegister}
 						value={registerCredentials.registerUserName}
 					/>
-
-					{/* <RegisterInput
-						title="email"
-						id="registerEmail"
-						type="email"
-						placeholder="Email"
-						onChange={handleRegister}
-						value={registerCredentials.registerEmail}
-					/> */}
 
 					<RegisterInput
 						title="Password"
