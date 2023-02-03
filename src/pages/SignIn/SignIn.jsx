@@ -68,18 +68,32 @@ const SignIn = ({
 				.then(data => {
 					if (data) {
 						console.log(data)
-						setBuyList(data.buyList[0].buyList)
-						setLibraryList(data.libraryList[0].libraryList)
+						// setBuyList(data.buyList[0].buyList)
+						// setLibraryList(data.libraryList[0].libraryList)
+
+						if (data.buyList !== 0) {
+							setBuyList(data.buyList[0].buyList)
+						} else {
+							return
+						}
+
+						if (data.libraryList !== 0) {
+							setLibraryList(data.libraryList[0].libraryList)
+						} else {
+							return
+						}
+
 						setUserProfile(data)
 						setSignedIn(true)
 					}
 				})
-			// .catch(err => {
+			// .catch(err => {z
 			// 	console.log("yessssss", err)
 			// })
 			//remove
 			console.log(signInCredentials)
 			console.log(userProfile)
+			console.log(userProfile.buyList)
 		} catch (error) {
 			console.log(error)
 		}
