@@ -71,17 +71,17 @@ const SignIn = ({
 						// setBuyList(data.buyList[0].buyList)
 						// setLibraryList(data.libraryList[0].libraryList)
 
-						if (data.buyList.length !== 0) {
-							setBuyList(data.buyList[0].buyList)
-						} else {
-							return
-						}
+						// if (data.buyList.length !== 0) {
+						// 	setBuyList(data.buyList[0].buyList)
+						// } else {
+						// 	return
+						// }
 
-						if (data.libraryList.length !== 0) {
-							setLibraryList(data.libraryList[0].libraryList)
-						} else {
-							return
-						}
+						// if (data.libraryList.length !== 0) {
+						// 	setLibraryList(data.libraryList[0].libraryList)
+						// } else {
+						// 	return
+						// }
 
 						setUserProfile(data)
 						setSignedIn(true)
