@@ -37,8 +37,6 @@ const GameDetails = ({signedIn}) => {
 	} else {
 		return (
 			<div className="GameDetails block">
-				{/* <Navbar signedIn={signedIn} /> */}
-
 				<div className="GameDetailsPageContainer bg-black w-full">
 					{game.map(x => {
 						return (

@@ -1,6 +1,6 @@
 import React from "react"
 
-const RegisterInput = ({value, onChange, title, id, type, placeholder}) => {
+const RegisterInput = ({value, onChange, title, id, type, placeholder, message, style}) => {
 	return (
 		<div className=" w-11/12 md:flex md:items-center mb-6">
 			<div className="md:w-1/3">
@@ -20,6 +20,9 @@ const RegisterInput = ({value, onChange, title, id, type, placeholder}) => {
 					value={value}
 					onChange={onChange}
 				/>
+				<p className="text-red-500" style={style}>
+					{message}
+				</p>
 			</div>
 		</div>
 	)

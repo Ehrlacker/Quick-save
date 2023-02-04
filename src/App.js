@@ -1,4 +1,5 @@
 import {Routes, Route} from "react-router-dom"
+import {useState} from "react"
 import "./App.css"
 import Homepage from "./pages/HomePage/HomePage"
 import GameDetails from "./pages/GameDetails/GameDetails"
@@ -14,6 +15,11 @@ const App = () => {
 	const [libraryList, setLibraryList] = useLocalStorage("libraryList", [])
 	const [signedIn, setSignedIn] = useLocalStorage("signedIn", true)
 	const [userProfile, setUserProfile] = useLocalStorage("userProfile", [])
+
+	// const [buyList, setBuyList] = useState([])
+	// const [libraryList, setLibraryList] = useState([])
+	// const [signedIn, setSignedIn] = useState(true)
+	// const [userProfile, setUserProfile] = useState([])
 
 	return (
 		<div className="App">

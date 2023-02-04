@@ -35,6 +35,8 @@ const HomePage = ({
 			.then(({results}) => setMustPlay(results))
 	}, [])
 
+	console.log(buyList)
+
 	//FindGames api call
 	const getGamesList = async () => {
 		const url = `https://api.rawg.io/api/games?key=${process.env.REACT_APP_apikey}&page_size=18&page=${pageNumber}&search=${gameSearch}&search_precise=true`
@@ -106,6 +108,7 @@ const HomePage = ({
 		if (alreadyExists === false) {
 			const newBuyList = [...buyList, game]
 			setBuyList(newBuyList)
+			console.log(buyList)
 			alert(`${game.name} added to Buy List`)
 		} else {
 			alert(`Warning! ${game.name} already added to Buy List`)
@@ -119,13 +122,13 @@ const HomePage = ({
 		await fetch("http://localhost:3002/buyList", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
-			body: JSON.stringify([{userProfile}, {buyList}]),
+			body: JSON.stringify([userProfile, buyList]),
 		})
 			.then(response => response.json())
 			.then(data => {
 				if (data) {
+					console.log(data)
 					setUserProfile(data)
-					// setBuyList(data.buyList[0].buyList)
 				}
 			})
 	}
@@ -156,13 +159,13 @@ const HomePage = ({
 		await fetch("http://localhost:3002/libraryList", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
-			body: JSON.stringify([{userProfile}, {libraryList}]),
+			body: JSON.stringify([userProfile, libraryList]),
 		})
 			.then(response => response.json())
 			.then(data => {
 				if (data) {
+					console.log(data)
 					setUserProfile(data)
-					// setBuyList(data.buyList[0].buyList)
 				}
 			})
 	}
@@ -179,8 +182,6 @@ const HomePage = ({
 
 	return (
 		<div className="HomePage bg-black w-screen h-full block bg-no-repeat bg-cover">
-			{/* <Navbar signedIn={signedIn} /> */}
-
 			<h1 className="text-white text-4xl font-bold text-center mt-16 mb-8">
 				Must Play Games
 			</h1>

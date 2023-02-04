@@ -2,16 +2,17 @@ import React, {useState} from "react"
 import RegisterInput from "../../components/RegisterInput/RegisterInput"
 import RegisterButton from "../../components/RegisterButton/RegisterButton"
 import {Navigate} from "react-router-dom"
-import axios from "axios"
 
 const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 	const [registerCredentials, setRegisterCredentials] = useState({
 		registerFirstName: "",
-		// registerLastName: "",
 		registerUserName: "",
-		// registerEmail: "",
 		registerPassword: "",
 	})
+
+	const [checkUsername, setCheckUsername] = useState(false)
+	const [checkPassword, setCheckPassword] = useState(false)
+	const [checkName, setCheckName] = useState(false)
 
 	const handleRegister = e => {
 		const {id, value} = e.target
@@ -21,46 +22,50 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 	}
 
 	const submitCredentials = () => {
-		// const url = "http://localhost:3002/buyList"
-		// const config = {headers: {"Content-Type": "application/json"}}
-		// const data = {
-		// 	body: JSON.stringify({
-		// 		firstName: registerCredentials.registerFirstName,
-		// 		username: registerCredentials.registerUserName,
-		// 		password: registerCredentials.registerPassword,
-		// 	}),
-		// }
-		// try {
-		// 	axios
-		// 		.post(url, config, data)
-		// 		.then(response => response.json())
-		// 		.then(user => {
-		// 			console.log("ttttttt")
-		// 			console.log(user)
-		// 		})
-		// } catch (error) {
-		// 	console.log(error)
-		// }
-		try {
-			console.log("workssss")
-			fetch("http://localhost:3002/register", {
-				method: "post",
-				headers: {"Content-Type": "application/json"},
-				body: JSON.stringify({
-					firstName: registerCredentials.registerFirstName,
-					// lastName: registerCredentials.registerLastName,
-					username: registerCredentials.registerUserName,
-					// email: registerCredentials.registerEmail,
-					password: registerCredentials.registerPassword,
-				}),
-			})
-				.then(response => response.json())
-				.then(user => {
-					console.log("ttttttt")
-					console.log(user)
+		if (registerCredentials.registerFirstName.length === 0) {
+			setCheckName(true)
+			return
+		} else if (
+			registerCredentials.registerUserName.length < 5 ||
+			registerCredentials.registerUserName.length > 20
+		) {
+			setCheckUsername(true)
+			return
+		} else if (
+			registerCredentials.registerPassword.length < 5 ||
+			registerCredentials.registerPassword.length > 20
+		) {
+			setCheckPassword(true)
+			return
+		} else {
+			try {
+				console.log("workssss")
+				fetch("http://localhost:3002/register", {
+					method: "post",
+					headers: {"Content-Type": "application/json"},
+					body: JSON.stringify({
+						firstName: registerCredentials.registerFirstName,
+						username: registerCredentials.registerUserName,
+						password: registerCredentials.registerPassword,
+					}),
 				})
-		} catch (error) {
-			console.log("yesss", error)
+					.then(response => response.json())
+					.then(user => {
+						console.log(user)
+						if (user) {
+							alert("You are now registered, please sign in!")
+						}
+						console.log("ttttttt")
+						console.log(user)
+					})
+				setRegisterCredentials({
+					registerFirstName: "",
+					registerUserName: "",
+					registerPassword: "",
+				})
+			} catch (error) {
+				console.log("yesss", error)
+			}
 		}
 	}
 
@@ -81,6 +86,8 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 						onChange={handleRegister}
 						placeholder="First Name"
 						value={registerCredentials.registerFirstName}
+						message="please add a first name"
+						style={checkName ? {display: "block"} : {display: "none"}}
 					/>
 
 					<RegisterInput
@@ -90,6 +97,8 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 						placeholder="Username"
 						onChange={handleRegister}
 						value={registerCredentials.registerUserName}
+						message="please add username between 5-20 characters"
+						style={checkUsername ? {display: "block"} : {display: "none"}}
 					/>
 
 					<RegisterInput
@@ -99,6 +108,8 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 						placeholder="******************"
 						onChange={handleRegister}
 						value={registerCredentials.registerPassword}
+						message="please add password between 5-20 characters"
+						style={checkPassword ? {display: "block"} : {display: "none"}}
 					/>
 
 					<RegisterButton onClick={submitCredentials} />

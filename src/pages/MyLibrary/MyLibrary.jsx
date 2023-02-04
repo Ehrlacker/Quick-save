@@ -24,14 +24,13 @@ const MyLibraryList = ({libraryList, setLibraryList, signedIn, userProfile, setU
 		await fetch("http://localhost:3002/libraryList", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
-			body: JSON.stringify([{userProfile}, {libraryList}]),
+			body: JSON.stringify([userProfile, libraryList]),
 		})
 			.then(response => response.json())
 			.then(data => {
 				if (data) {
 					console.log(data)
 					setUserProfile(data)
-					// setBuyList(data.buyList[0].buyList)
 				}
 			})
 	}
@@ -46,7 +45,6 @@ const MyLibraryList = ({libraryList, setLibraryList, signedIn, userProfile, setU
 		if (libraryList.length === 0) {
 			return (
 				<div className="BuyList">
-					{/* <Navbar signedIn={signedIn} /> */}
 					<h1 className="text-white text-5xl text-center font-bold h-screen mt-16">
 						Please Add some games to the Library list
 					</h1>
@@ -55,8 +53,6 @@ const MyLibraryList = ({libraryList, setLibraryList, signedIn, userProfile, setU
 		} else {
 			return (
 				<div className="BuyList">
-					{/* <Navbar signedIn={signedIn} /> */}
-
 					<div className="BuyGameList w-full flex flex-wrap justify-evenly bg-black mt-16 h-full">
 						{libraryList.map(game => {
 							return (

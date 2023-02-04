@@ -2,7 +2,6 @@ import React, {useState} from "react"
 import SignInInput from "../../components/SingInInput/SignInInput"
 import {Navigate} from "react-router-dom"
 import {Link} from "react-router-dom"
-import axios from "axios"
 
 const SignIn = ({
 	signedIn,
@@ -17,6 +16,7 @@ const SignIn = ({
 		signInUsername: "",
 		signnInPassword: "",
 	})
+	const [signinErrorMessage, setErrorMessage] = useState("")
 
 	const handleSignIn = e => {
 		const {id, value} = e.target
@@ -28,32 +28,6 @@ const SignIn = ({
 	const submitEmailPassword = async () => {
 		console.log(signInCredentials)
 		console.log(userProfile)
-		// const url = "http://localhost:3002/buyList"
-		// const config = {headers: {"Content-Type": "application/json"}}
-		// const data = {
-		// 	body: JSON.stringify({
-		// 		username: signInCredentials.signInUsername,
-		// 		password: signInCredentials.signnInPassword,
-		// 	}),
-		// }
-		// try {
-		// 	console.log(signInCredentials)
-		// 	axios
-		// 		.post(url, config, data)
-		// 		.then(response => response.json())
-		// 		.then(data => {
-		// 			if (data) {
-		// 				console.log(data)
-
-		// 				setBuyList(data.buyList[0].buyList)
-		// 				setLibraryList(data.libraryList[0].libraryList)
-		// 				setUserProfile(data)
-		// 				setSignedIn(true)
-		// 			}
-		// 		})
-		// } catch (error) {
-		// 	console.log(error)
-		// }
 
 		try {
 			fetch("http://localhost:3002/signin", {
@@ -64,36 +38,19 @@ const SignIn = ({
 					password: signInCredentials.signnInPassword,
 				}),
 			})
+				//response.statusCode !== 200
 				.then(response => response.json())
 				.then(data => {
-					if (data) {
-						console.log(data)
+					if (data.id) {
 						setBuyList(data.buyList)
 						setLibraryList(data.libraryList)
-
-						// if (data.buyList.length !== 0) {
-						// 	setBuyList(data.buyList[0].buyList)
-						// } else {
-						// 	return
-						// }
-
-						// if (data.libraryList.length !== 0) {
-						// 	setLibraryList(data.libraryList[0].libraryList)
-						// } else {
-						// 	return
-						// }
-
 						setUserProfile(data)
 						setSignedIn(true)
+					} else {
+						console.log(data.errors)
+						setErrorMessage(data.errors)
 					}
 				})
-			// .catch(err => {z
-			// 	console.log("yessssss", err)
-			// })
-			//remove
-			console.log(signInCredentials)
-			console.log(userProfile)
-			console.log(userProfile.buyList)
 		} catch (error) {
 			console.log(error)
 		}
@@ -105,8 +62,6 @@ const SignIn = ({
 
 	return (
 		<div className="SignIn">
-			{/* <Navbar /> */}
-
 			<div className="w-full flex justify-center items-center mt-32 ">
 				<div className="FORM p-4 w-4/5 max-w-sm bg-white rounded-md">
 					<h1 className="text-center text-black text-4xl font-bold mb-4">Sign In</h1>
@@ -148,6 +103,7 @@ const SignIn = ({
 							</div>
 						</div>
 					</div>
+					<p className="text-red-500 text-center">{signinErrorMessage}</p>
 				</div>
 			</div>
 		</div>
@@ -155,15 +111,3 @@ const SignIn = ({
 }
 
 export default SignIn
-
-// if (data.buyList !== 0) {
-// 	setBuyList(data.buyList[0].buyList)
-// } else {
-// 	return
-// }
-
-// if (data.libraryList !== 0) {
-// 	setLibraryList(data.libraryList[0].libraryList)
-// } else {
-// 	return
-// }
