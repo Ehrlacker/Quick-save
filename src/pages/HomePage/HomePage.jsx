@@ -35,14 +35,12 @@ const HomePage = ({
 			.then(({results}) => setMustPlay(results))
 	}, [])
 
-	console.log(buyList)
-
 	//FindGames api call
 	const getGamesList = async () => {
 		const url = `https://api.rawg.io/api/games?key=${process.env.REACT_APP_apikey}&page_size=18&page=${pageNumber}&search=${gameSearch}&search_precise=true`
 		const response = await fetch(url)
 		const resJSON = await response.json()
-		console.log(resJSON.results)
+		// console.log(resJSON.results)
 		setGames(resJSON.results)
 		if (resJSON.next === null) {
 			setDontCallApiAgain(1)
@@ -67,7 +65,6 @@ const HomePage = ({
 			return
 		} else {
 			setPageNumber(prevValue => {
-				console.log(prevValue - 1)
 				return prevValue - 1
 			})
 			setDontCallApiAgain(0)
@@ -84,7 +81,6 @@ const HomePage = ({
 		setGameInputValue("")
 		setDontCallApiAgain(0)
 		setPageNumber(1)
-		console.log(gameInputValue)
 	}
 	//Search for game on Key Press
 	const keyPressSearch = e => {
@@ -93,7 +89,6 @@ const HomePage = ({
 			setGameInputValue("")
 			setDontCallApiAgain(0)
 			setPageNumber(1)
-			console.log(gameInputValue)
 		} else {
 			return
 		}
@@ -119,7 +114,8 @@ const HomePage = ({
 		if (userProfile.length === 0) {
 			return
 		}
-		await fetch("http://localhost:3002/buyList", {
+		// await fetch("http://localhost:3002/buyList", {
+		await fetch("https://quick-save-server.onrender.com/buyList", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify([userProfile, buyList]),
@@ -127,7 +123,6 @@ const HomePage = ({
 			.then(response => response.json())
 			.then(data => {
 				if (data) {
-					console.log(data)
 					setUserProfile(data)
 				}
 			})
@@ -156,7 +151,8 @@ const HomePage = ({
 		if (userProfile.length === 0) {
 			return
 		}
-		await fetch("http://localhost:3002/libraryList", {
+		// await fetch("http://localhost:3002/libraryList", {
+		await fetch("https://quick-save-server.onrender.com/libraryList", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify([userProfile, libraryList]),
@@ -164,7 +160,6 @@ const HomePage = ({
 			.then(response => response.json())
 			.then(data => {
 				if (data) {
-					console.log(data)
 					setUserProfile(data)
 				}
 			})

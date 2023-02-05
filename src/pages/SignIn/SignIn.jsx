@@ -30,7 +30,8 @@ const SignIn = ({
 		console.log(userProfile)
 
 		try {
-			fetch("http://localhost:3002/signin", {
+			// fetch("http://localhost:3002/signin", {
+			await fetch("https://quick-save-server.onrender.com/signin", {
 				method: "post",
 				headers: {"Content-Type": "application/json"},
 				body: JSON.stringify({

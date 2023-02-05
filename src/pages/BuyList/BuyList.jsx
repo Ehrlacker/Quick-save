@@ -23,7 +23,8 @@ const BuyList = ({buyList, setBuyList, signedIn, userProfile, setUserProfile}) =
 			return
 		}
 
-		await fetch("http://localhost:3002/buyList", {
+		// await fetch("http://localhost:3002/buyList", {
+		await fetch("https://quick-save-server.onrender.com/buyList", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify([userProfile, buyList]),

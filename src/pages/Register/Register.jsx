@@ -21,7 +21,7 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 		})
 	}
 
-	const submitCredentials = () => {
+	const submitCredentials = async () => {
 		if (registerCredentials.registerFirstName.length === 0) {
 			setCheckName(true)
 			return
@@ -39,8 +39,8 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 			return
 		} else {
 			try {
-				console.log("workssss")
-				fetch("http://localhost:3002/register", {
+				// fetch("http://localhost:3002/register", {
+				await fetch("https://quick-save-server.onrender.com/register", {
 					method: "post",
 					headers: {"Content-Type": "application/json"},
 					body: JSON.stringify({
