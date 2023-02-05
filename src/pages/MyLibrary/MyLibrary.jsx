@@ -30,7 +30,6 @@ const MyLibraryList = ({libraryList, setLibraryList, signedIn, userProfile, setU
 			.then(response => response.json())
 			.then(data => {
 				if (data) {
-					console.log(data)
 					setUserProfile(data)
 				}
 			})

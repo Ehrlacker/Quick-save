@@ -18,7 +18,6 @@ const BuyList = ({buyList, setBuyList, signedIn, userProfile, setUserProfile}) =
 	}
 
 	const updateBuyList = async () => {
-		console.log(buyList)
 		if (userProfile.length === 0) {
 			return
 		}
@@ -32,7 +31,6 @@ const BuyList = ({buyList, setBuyList, signedIn, userProfile, setUserProfile}) =
 			.then(response => response.json())
 			.then((data, err) => {
 				if (data) {
-					console.log(data)
 					setUserProfile(data)
 				}
 			})

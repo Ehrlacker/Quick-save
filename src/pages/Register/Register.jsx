@@ -39,7 +39,7 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 			return
 		} else {
 			try {
-				// fetch("http://localhost:3002/register", {
+				// await fetch("http://localhost:3002/register", {
 				await fetch("https://quick-save-server.onrender.com/register", {
 					method: "post",
 					headers: {"Content-Type": "application/json"},
@@ -49,23 +49,20 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 						password: registerCredentials.registerPassword,
 					}),
 				})
+					.then(
+						setRegisterCredentials({
+							registerFirstName: "",
+							registerUserName: "",
+							registerPassword: "",
+						}),
+					)
 					.then(response => response.json())
 					.then(user => {
-						console.log(user)
 						if (user) {
 							alert("You are now registered, please sign in!")
 						}
-						console.log("ttttttt")
-						console.log(user)
 					})
-				setRegisterCredentials({
-					registerFirstName: "",
-					registerUserName: "",
-					registerPassword: "",
-				})
-			} catch (error) {
-				console.log("yesss", error)
-			}
+			} catch (error) {}
 		}
 	}
 

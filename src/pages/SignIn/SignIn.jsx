@@ -26,11 +26,8 @@ const SignIn = ({
 	}
 
 	const submitEmailPassword = async () => {
-		console.log(signInCredentials)
-		console.log(userProfile)
-
 		try {
-			// fetch("http://localhost:3002/signin", {
+			// await fetch("http://localhost:3002/signin", {
 			await fetch("https://quick-save-server.onrender.com/signin", {
 				method: "post",
 				headers: {"Content-Type": "application/json"},
@@ -39,6 +36,12 @@ const SignIn = ({
 					password: signInCredentials.signnInPassword,
 				}),
 			})
+				.then(
+					setSignInCredentials({
+						signInUsername: "",
+						signnInPassword: "",
+					}),
+				)
 				//response.statusCode !== 200
 				.then(response => response.json())
 				.then(data => {
@@ -48,13 +51,12 @@ const SignIn = ({
 						setUserProfile(data)
 						setSignedIn(true)
 					} else {
+						console.log(data)
 						console.log(data.errors)
 						setErrorMessage(data.errors)
 					}
 				})
-		} catch (error) {
-			console.log(error)
-		}
+		} catch (error) {}
 	}
 
 	if (signedIn) {
