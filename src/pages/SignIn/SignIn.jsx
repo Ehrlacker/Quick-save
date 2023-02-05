@@ -51,8 +51,6 @@ const SignIn = ({
 						setUserProfile(data)
 						setSignedIn(true)
 					} else {
-						console.log(data)
-						console.log(data.errors)
 						setErrorMessage(data.errors)
 					}
 				})
