@@ -10,19 +10,20 @@ import "./MyLibrary.css"
 const MyLibraryList = ({libraryList, setLibraryList, signedIn, userProfile, setUserProfile}) => {
 	const navigate = useNavigate()
 
-	const removeFromLibraryList = game => {
+	const removeFromLibraryList = async game => {
 		const newLibraryList = libraryList.filter(libraryListGame => {
 			return libraryListGame.id !== game.id
 		})
 		setLibraryList(newLibraryList)
 	}
 
+	// useEffect(() => {
 	const updateLibraryList = async () => {
 		if (userProfile.length === 0) {
 			return
 		}
-		// await fetch("http://localhost:3002/libraryList", {
-		await fetch("https://quick-save-server.onrender.com/libraryList", {
+		await fetch("http://localhost:3002/libraryList", {
+			// await fetch("https://quick-save-server.onrender.com/libraryList", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify([userProfile, libraryList]),
@@ -34,6 +35,8 @@ const MyLibraryList = ({libraryList, setLibraryList, signedIn, userProfile, setU
 				}
 			})
 	}
+	// 	updateLibraryList()
+	// }, [libraryList, setUserProfile, userProfile])
 
 	useEffect(() => {
 		updateLibraryList()

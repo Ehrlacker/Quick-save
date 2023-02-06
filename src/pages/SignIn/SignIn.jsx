@@ -27,8 +27,8 @@ const SignIn = ({
 
 	const submitEmailPassword = async () => {
 		try {
-			// await fetch("http://localhost:3002/signin", {
-			await fetch("https://quick-save-server.onrender.com/signin", {
+			await fetch("http://localhost:3002/signin", {
+				// await fetch("https://quick-save-server.onrender.com/signin", {
 				method: "post",
 				headers: {"Content-Type": "application/json"},
 				body: JSON.stringify({

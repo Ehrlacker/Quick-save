@@ -94,7 +94,7 @@ const HomePage = ({
 		}
 	}
 
-	const addToBuyList = game => {
+	const addToBuyList = async game => {
 		if (signedIn === false) {
 			alert("Please Sign In")
 			return
@@ -103,19 +103,23 @@ const HomePage = ({
 		if (alreadyExists === false) {
 			const newBuyList = [...buyList, game]
 			setBuyList(newBuyList)
+			// userProfile.buyList.push(game)
 
 			alert(`${game.name} added to Buy List`)
 		} else {
 			alert(`Warning! ${game.name} already added to Buy List`)
 		}
+		// await updateBuyList()
 	}
 
+	// useEffect(() => {
+	// 	console.log(buyList)
 	const updateBuyList = async () => {
 		if (userProfile.length === 0) {
 			return
 		}
-		// await fetch("http://localhost:3002/buyList", {
-		await fetch("https://quick-save-server.onrender.com/buyList", {
+		await fetch("http://localhost:3002/buyList", {
+			// await fetch("https://quick-save-server.onrender.com/buyList", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify([userProfile, buyList]),
@@ -128,11 +132,14 @@ const HomePage = ({
 			})
 	}
 
+	// 	updateBuyList()
+	// }, [buyList, , userProfile])
+
 	useEffect(() => {
 		updateBuyList()
 	}, [buyList])
 
-	const addToLibraryList = game => {
+	const addToLibraryList = async game => {
 		if (signedIn === false) {
 			alert("Please Sign In")
 			return
@@ -141,18 +148,20 @@ const HomePage = ({
 		if (alreadyExists === false) {
 			const newLibraryList = [...libraryList, game]
 			setLibraryList(newLibraryList)
+
 			alert(`${game.name} added to library List`)
 		} else {
 			alert(`Warning! ${game.name} already added to Library List`)
 		}
+		// await updateLibraryList()
 	}
 
 	const updateLibraryList = async () => {
 		if (userProfile.length === 0) {
 			return
 		}
-		// await fetch("http://localhost:3002/libraryList", {
-		await fetch("https://quick-save-server.onrender.com/libraryList", {
+		await fetch("http://localhost:3002/libraryList", {
+			// await fetch("https://quick-save-server.onrender.com/libraryList", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify([userProfile, libraryList]),

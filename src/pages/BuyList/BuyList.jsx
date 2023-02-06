@@ -10,20 +10,22 @@ import {useNavigate} from "react-router-dom"
 const BuyList = ({buyList, setBuyList, signedIn, userProfile, setUserProfile}) => {
 	const navigate = useNavigate()
 
-	const removeFromBuyList = game => {
+	const removeFromBuyList = async game => {
 		const newBuyList = buyList.filter(buyListGame => {
 			return buyListGame.id !== game.id
 		})
 		setBuyList(newBuyList)
+		await updateBuyList()
 	}
 
+	// useEffect(() => {
 	const updateBuyList = async () => {
 		if (userProfile.length === 0) {
 			return
 		}
 
-		// await fetch("http://localhost:3002/buyList", {
-		await fetch("https://quick-save-server.onrender.com/buyList", {
+		await fetch("http://localhost:3002/buyList", {
+			// await fetch("https://quick-save-server.onrender.com/buyList", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify([userProfile, buyList]),
@@ -35,6 +37,8 @@ const BuyList = ({buyList, setBuyList, signedIn, userProfile, setUserProfile}) =
 				}
 			})
 	}
+	// 	updateBuyList()
+	// }, [buyList, userProfile])
 
 	useEffect(() => {
 		updateBuyList()

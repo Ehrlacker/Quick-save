@@ -1,5 +1,4 @@
 import {Routes, Route} from "react-router-dom"
-import {useState} from "react"
 import "./App.css"
 import Homepage from "./pages/HomePage/HomePage"
 import GameDetails from "./pages/GameDetails/GameDetails"
