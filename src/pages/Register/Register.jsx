@@ -39,8 +39,8 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 			return
 		} else {
 			try {
-				await fetch("http://localhost:3002/register", {
-					// await fetch("https://quick-save-server.onrender.com/register", {
+				// await fetch("http://localhost:3002/register", {
+				await fetch("https://quick-save-server.onrender.com/register", {
 					method: "post",
 					headers: {"Content-Type": "application/json"},
 					body: JSON.stringify({
