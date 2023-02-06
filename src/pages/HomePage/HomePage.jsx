@@ -118,8 +118,8 @@ const HomePage = ({
 		if (userProfile.length === 0) {
 			return
 		}
-		await fetch("http://localhost:3002/buyList", {
-			// await fetch("https://quick-save-server.onrender.com/buyList", {
+		// await fetch("http://localhost:3002/buyList", {
+		await fetch("https://quick-save-server.onrender.com/buyList", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify([userProfile, buyList]),

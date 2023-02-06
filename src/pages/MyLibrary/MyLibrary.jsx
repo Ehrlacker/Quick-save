@@ -4,7 +4,6 @@ import Footer from "../../components/Footer/Footer"
 import {Navigate} from "react-router-dom"
 import {BuildingLibraryIcon} from "@heroicons/react/24/solid"
 import {useNavigate} from "react-router-dom"
-// import EmptylibraryList from "../../components/EmptyLibraryList/EmptyLibraryList"
 import "./MyLibrary.css"
 
 const MyLibraryList = ({libraryList, setLibraryList, signedIn, userProfile, setUserProfile}) => {
@@ -22,8 +21,8 @@ const MyLibraryList = ({libraryList, setLibraryList, signedIn, userProfile, setU
 		if (userProfile.length === 0) {
 			return
 		}
-		await fetch("http://localhost:3002/libraryList", {
-			// await fetch("https://quick-save-server.onrender.com/libraryList", {
+		// await fetch("http://localhost:3002/libraryList", {
+		await fetch("https://quick-save-server.onrender.com/libraryList", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify([userProfile, libraryList]),
