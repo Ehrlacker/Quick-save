@@ -160,8 +160,8 @@ const HomePage = ({
 		if (userProfile.length === 0) {
 			return
 		}
-		await fetch("http://localhost:3002/libraryList", {
-			// await fetch("https://quick-save-server.onrender.com/libraryList", {
+		// await fetch("http://localhost:3002/libraryList", {
+		await fetch("https://quick-save-server.onrender.com/libraryList", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify([userProfile, libraryList]),
