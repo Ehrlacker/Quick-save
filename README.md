@@ -1,6 +1,8 @@
 # Quick-Save
 
-## [Demo](https://quick-save.vercel.app/)
+## view a demo of this project
+
+* [Demo](https://quick-save.vercel.app/)
 
 ## Description
 

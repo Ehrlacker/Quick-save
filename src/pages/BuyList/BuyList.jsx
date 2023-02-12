@@ -15,34 +15,29 @@ const BuyList = ({buyList, setBuyList, signedIn, userProfile, setUserProfile}) =
 			return buyListGame.id !== game.id
 		})
 		setBuyList(newBuyList)
-		await updateBuyList()
 	}
 
 	// useEffect(() => {
-	const updateBuyList = async () => {
-		if (userProfile.length === 0) {
-			return
+	useEffect(() => {
+		const updateBuyList = async () => {
+			if (userProfile.length === 0) {
+				return
+			}
+			await fetch(process.env.REACT_APP_serverbuylist, {
+				method: "post",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify([userProfile, buyList]),
+			})
+				.then(response => response.json())
+				.then((data, err) => {
+					if (data) {
+						setUserProfile(data)
+					}
+				})
 		}
 
-		// await fetch("http://localhost:3002/buyList", {
-		await fetch("https://quick-save-server.onrender.com/buyList", {
-			method: "post",
-			headers: {"Content-Type": "application/json"},
-			body: JSON.stringify([userProfile, buyList]),
-		})
-			.then(response => response.json())
-			.then((data, err) => {
-				if (data) {
-					setUserProfile(data)
-				}
-			})
-	}
-	// 	updateBuyList()
-	// }, [buyList, userProfile])
-
-	useEffect(() => {
 		updateBuyList()
-	}, [buyList])
+	}, [buyList, userProfile, setUserProfile])
 
 	if (!signedIn) {
 		return <Navigate to="/SignIn" />

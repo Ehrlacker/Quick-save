@@ -36,18 +36,18 @@ const HomePage = ({
 	}, [])
 
 	//FindGames api call
-	const getGamesList = async () => {
-		const url = `https://api.rawg.io/api/games?key=${process.env.REACT_APP_apikey}&page_size=18&page=${pageNumber}&search=${gameSearch}&search_precise=true`
-		const response = await fetch(url)
-		const resJSON = await response.json()
-		// console.log(resJSON.results)
-		setGames(resJSON.results)
-		if (resJSON.next === null) {
-			setDontCallApiAgain(1)
-		}
-	}
-
 	useEffect(() => {
+		const getGamesList = async () => {
+			const url = `https://api.rawg.io/api/games?key=${process.env.REACT_APP_apikey}&page_size=18&page=${pageNumber}&search=${gameSearch}&search_precise=true`
+			const response = await fetch(url)
+			const resJSON = await response.json()
+			console.log(resJSON.results)
+			setGames(resJSON.results)
+			if (resJSON.next === null) {
+				setDontCallApiAgain(1)
+			}
+		}
+
 		getGamesList()
 	}, [pageNumber, gameSearch])
 
@@ -103,23 +103,18 @@ const HomePage = ({
 		if (alreadyExists === false) {
 			const newBuyList = [...buyList, game]
 			setBuyList(newBuyList)
-			// userProfile.buyList.push(game)
-
 			alert(`${game.name} added to Buy List`)
 		} else {
 			alert(`Warning! ${game.name} already added to Buy List`)
 		}
-		// await updateBuyList()
 	}
 
-	// useEffect(() => {
-	// 	console.log(buyList)
 	const updateBuyList = async () => {
 		if (userProfile.length === 0) {
 			return
 		}
-		// await fetch("http://localhost:3002/buyList", {
-		await fetch("https://quick-save-server.onrender.com/buyList", {
+
+		await fetch(process.env.REACT_APP_serverbuylist, {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify([userProfile, buyList]),
@@ -131,9 +126,6 @@ const HomePage = ({
 				}
 			})
 	}
-
-	// 	updateBuyList()
-	// }, [buyList, , userProfile])
 
 	useEffect(() => {
 		updateBuyList()
@@ -153,15 +145,14 @@ const HomePage = ({
 		} else {
 			alert(`Warning! ${game.name} already added to Library List`)
 		}
-		// await updateLibraryList()
 	}
 
 	const updateLibraryList = async () => {
 		if (userProfile.length === 0) {
 			return
 		}
-		// await fetch("http://localhost:3002/libraryList", {
-		await fetch("https://quick-save-server.onrender.com/libraryList", {
+
+		await fetch(process.env.REACT_APP_serverlibrary, {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify([userProfile, libraryList]),
