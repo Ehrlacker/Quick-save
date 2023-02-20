@@ -110,21 +110,22 @@ const HomePage = ({
 	}
 
 	const updateBuyList = async () => {
-		if (userProfile.length === 0) {
-			return
-		}
-
-		await fetch(process.env.REACT_APP_serverbuylist, {
-			method: "post",
-			headers: {"Content-Type": "application/json"},
-			body: JSON.stringify([userProfile, buyList]),
-		})
-			.then(response => response.json())
-			.then(data => {
-				if (data) {
-					setUserProfile(data)
-				}
+		try {
+			if (userProfile.length === 0) {
+				return
+			}
+			const response = await fetch(process.env.REACT_APP_serverbuylist, {
+				method: "post",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify([userProfile, buyList]),
 			})
+			const data = await response.json()
+			if (data) {
+				await setUserProfile(data)
+			}
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	useEffect(() => {
@@ -148,21 +149,22 @@ const HomePage = ({
 	}
 
 	const updateLibraryList = async () => {
-		if (userProfile.length === 0) {
-			return
-		}
-
-		await fetch(process.env.REACT_APP_serverlibrary, {
-			method: "post",
-			headers: {"Content-Type": "application/json"},
-			body: JSON.stringify([userProfile, libraryList]),
-		})
-			.then(response => response.json())
-			.then(data => {
-				if (data) {
-					setUserProfile(data)
-				}
+		try {
+			if (userProfile.length === 0) {
+				return
+			}
+			const response = await fetch(process.env.REACT_APP_serverlibrary, {
+				method: "post",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify([userProfile, libraryList]),
 			})
+			const data = await response.json()
+			if (data) {
+				await setUserProfile(data)
+			}
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	useEffect(() => {

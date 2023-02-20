@@ -27,37 +27,34 @@ const SignIn = ({
 
 	const submitEmailPassword = async () => {
 		try {
-			await fetch(
-				process.env.REACT_APP_serversignin,
+			const response = await fetch(process.env.REACT_APP_serversignin, {
+				method: "post",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify({
+					username: signInCredentials.signInUsername,
+					password: signInCredentials.signnInPassword,
+				}),
+			})
 
-				{
-					method: "post",
-					headers: {"Content-Type": "application/json"},
-					body: JSON.stringify({
-						username: signInCredentials.signInUsername,
-						password: signInCredentials.signnInPassword,
-					}),
-				},
-			)
-				.then(
-					setSignInCredentials({
-						signInUsername: "",
-						signnInPassword: "",
-					}),
-				)
-				//response.statusCode !== 200
-				.then(response => response.json())
-				.then(data => {
-					if (data.id) {
-						setBuyList(data.buyList)
-						setLibraryList(data.libraryList)
-						setUserProfile(data)
-						setSignedIn(true)
-					} else {
-						setErrorMessage(data.errors)
-					}
-				})
-		} catch (error) {}
+			const data = await response.json()
+			if (data.id) {
+				setBuyList(data.buyList)
+				setLibraryList(data.libraryList)
+				setUserProfile(data)
+				setSignedIn(true)
+				console.log(userProfile)
+			} else {
+				console.log("errorrrrrr:", data.errors)
+				setErrorMessage("Please use a valid username and password!")
+				return
+			}
+			setSignInCredentials({
+				signInUsername: "",
+				signnInPassword: "",
+			})
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	if (signedIn) {

@@ -10,34 +10,35 @@ import {useNavigate} from "react-router-dom"
 const BuyList = ({buyList, setBuyList, signedIn, userProfile, setUserProfile}) => {
 	const navigate = useNavigate()
 
-	const removeFromBuyList = async game => {
+	const removeFromBuyList = game => {
 		const newBuyList = buyList.filter(buyListGame => {
 			return buyListGame.id !== game.id
 		})
 		setBuyList(newBuyList)
 	}
 
-	// useEffect(() => {
-	useEffect(() => {
-		const updateBuyList = async () => {
+	const updateBuyList = async () => {
+		try {
 			if (userProfile.length === 0) {
 				return
 			}
-			await fetch(process.env.REACT_APP_serverbuylist, {
+			const response = await fetch(process.env.REACT_APP_serverbuylist, {
 				method: "post",
 				headers: {"Content-Type": "application/json"},
 				body: JSON.stringify([userProfile, buyList]),
 			})
-				.then(response => response.json())
-				.then((data, err) => {
-					if (data) {
-						setUserProfile(data)
-					}
-				})
+			const data = await response.json()
+			if (data) {
+				await setUserProfile(data)
+			}
+		} catch (error) {
+			console.error(error)
 		}
+	}
 
+	useEffect(() => {
 		updateBuyList()
-	}, [buyList, userProfile, setUserProfile])
+	}, [buyList])
 
 	if (!signedIn) {
 		return <Navigate to="/SignIn" />

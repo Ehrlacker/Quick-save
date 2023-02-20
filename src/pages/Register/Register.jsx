@@ -39,7 +39,7 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 			return
 		} else {
 			try {
-				await fetch(process.env.REACT_APP_serverregister, {
+				const response = await fetch(process.env.REACT_APP_serverregister, {
 					method: "post",
 					headers: {"Content-Type": "application/json"},
 					body: JSON.stringify({
@@ -48,20 +48,19 @@ const SignIn = ({signedIn, setSignedIn, userProfile, setUserProfile}) => {
 						password: registerCredentials.registerPassword,
 					}),
 				})
-					.then(
-						setRegisterCredentials({
-							registerFirstName: "",
-							registerUserName: "",
-							registerPassword: "",
-						}),
-					)
-					.then(response => response.json())
-					.then(user => {
-						if (user) {
-							alert("You are now registered, please sign in!")
-						}
-					})
-			} catch (error) {}
+				const data = await response.json()
+				setRegisterCredentials({
+					registerFirstName: "",
+					registerUserName: "",
+					registerPassword: "",
+				})
+
+				if (data) {
+					alert("You are now registered, please sign in!")
+				}
+			} catch (error) {
+				console.error(error)
+			}
 		}
 	}
 
