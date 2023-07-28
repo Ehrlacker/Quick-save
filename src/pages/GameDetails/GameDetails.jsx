@@ -18,17 +18,13 @@ const GameDetails = ({signedIn}) => {
 				`https://api.rawg.io/api/games?key=${process.env.REACT_APP_apikey}&page_size=1&search_exact=true&search=${name}`,
 			)
 			.then(res => {
-				console.log(res.data)
 				setGame(res.data.results)
-				console.log(res.data.results)
 			})
 			.catch(err => console.log(err))
 	}, [name])
 
 	const ref = useRef(null)
-
 	const scroll = scrollOffset => {
-		console.log("clicked")
 		ref.current.scrollLeft += scrollOffset
 	}
 

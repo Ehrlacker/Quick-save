@@ -41,7 +41,6 @@ const HomePage = ({
 			const url = `https://api.rawg.io/api/games?key=${process.env.REACT_APP_apikey}&page_size=18&page=${pageNumber}&search=${gameSearch}&search_precise=true`
 			const response = await fetch(url)
 			const resJSON = await response.json()
-			console.log(resJSON.results)
 			setGames(resJSON.results)
 			if (resJSON.next === null) {
 				setDontCallApiAgain(1)
