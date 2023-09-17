@@ -1,0 +1,15 @@
+
+.LogoH1{
+    text-shadow: 2px 4px 4px black;
+}
+
+@media (max-width: 575px) {
+
+    .NavLogo{
+        flex-direction: column;
+        margin-top: 2rem;
+        
+    }
+
+ 
+ }

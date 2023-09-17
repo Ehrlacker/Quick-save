@@ -5,7 +5,7 @@ const NavItem = ({page, onClick, title, description}) => {
 	return (
 		<>
 			<p
-				className="text-lg mr-6 text-white font-bold md:text-3xl hover:scale-105 transition-transform"
+				className="text-sm mr-4 mb-.5 text-white font-bold hover:scale-105 transition-transform md:text-3xl mb-.5"
 				onClick={onClick}
 			>
 				<Link to={page}>{title}</Link>

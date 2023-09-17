@@ -1,10 +1,10 @@
 import React from "react"
 
-const NavItem = ({onClick, title}) => {
+const SignOut = ({onClick, title}) => {
 	return (
 		<>
 			<p
-				className="text-lg mr-6 text-white font-bold md:text-3xl cursor-pointer hover:scale-105 transition-transform"
+				className="text-sm mr-4 mb-.5 text-white font-bold hover:scale-105 transition-transform cursor-pointer md:text-3xl mb-.5"
 				onClick={onClick}
 			>
 				{title}
@@ -13,4 +13,4 @@ const NavItem = ({onClick, title}) => {
 	)
 }
 
-export default NavItem
+export default SignOut

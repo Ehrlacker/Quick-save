@@ -1,59 +1,71 @@
-import React, {useRef} from "react"
+import React, { useRef, useState } from "react"
 import NavItem from "../NavItem/NavItem"
 import Logo from "../../assets/images/Logo.jpg"
+import Hamburger from "hamburger-react"
 import SignOut from "../../components/SignOut/SignOut"
+import NavLogo from '../NavLogo/NavLogo'
 
 import "./Navbar.css"
 
-const Navbar = ({signedIn, setSignedIn, setUserProfile, userProfile, setBuyList}) => {
+const Navbar = ({ signedIn, setSignedIn, setUserProfile, userProfile, setBuyList }) => {
 	const ref = useRef(null)
+	const [isOpen, setOpen] = useState(false);
 
 	const signOutIfSignedIn = () => {
 		setSignedIn(false)
 		setUserProfile([])
 	}
 
-	return (
-		<div className="Navbar p-8 w-full flex flex-col items-center justify-center">
-			<div className="w-full">
-				<div className="flex items-center mt-8">
-					<img
-						className="Logo w-[100px] md:w-[150px] rounded-full"
-						src={Logo}
-						alt="a logo"
-					/>
-					<h1 className="text-4xl text-white ml-4 font-bold md:text-8xl">Quick-Save</h1>
+	if (isOpen) {
+		return (
+			<div className="Navbar flex flex-col items-center justify-center">
+				<div className="w-full flex justify-between">
+					<NavLogo />
+
+
+					<nav className="navBarListItems p-2 flex flex-col mt-2 items-end justify-center absolute top-1 right-4 bg-indigo-800 md:top-8">
+						<Hamburger color="white" toggled={isOpen} toggle={setOpen} />
+						<div className="flex flex-col items-end justify-end">
+
+							<NavItem page={"/"} title="Home" />
+							<NavItem page={"/BuyList"} title="Buy list" />
+							<NavItem page={"/MyLibrary"} title="Library" />
+						</div>
+
+
+						<div className="flex flex-col items-center justify-center w-full" ref={ref}>
+							<div style={signedIn ? { display: "none" } : { display: "block" }}>
+								<NavItem page={"/SignIn"} title="Sign In" />
+							</div>
+
+
+							<div style={signedIn ? { display: "block" } : { display: "none" }}>
+								<SignOut title="Sign Out" onClick={signOutIfSignedIn} />
+							</div>
+
+							<div className="flex justify-end items-end "
+								style={
+									signedIn ? { display: "none" } : { display: "block" }
+								}
+							>
+								<NavItem page={"/Register"} title="Register"  />
+								
+							</div>
+						</div>
+
+
+
+
+					</nav>
 				</div>
-				{/* <div
-					className="text-violet-500 text-3xl font-bold text-start mt-8"
-					style={userProfile.length === 0 ? {display: "none"} : {display: "block"}}
-				>
-					Hey {userProfile ? userProfile.username : ""}
-				</div> */}
+			</div>
 
-				<nav className="navBarListItems flex mt-16 items-center justify-between">
-					<div className="flex">
-						<NavItem page={"/"} title="Home" />
-						<NavItem page={"/BuyList"} title="Buy list" />
-						<NavItem page={"/MyLibrary"} title="My Library" />
-					</div>
-					<div className="flex" ref={ref}>
-						<div style={signedIn ? {display: "none"} : {display: "block"}}>
-							<NavItem page={"/SignIn"} title="Sign In" />
-						</div>
-						<div style={signedIn ? {display: "block"} : {display: "none"}}>
-							<SignOut title="Sign Out" onClick={signOutIfSignedIn} />
-						</div>
-
-						<div
-							style={
-								signedIn ? {display: "none"} : {display: "block", marginRight: 10}
-							}
-						>
-							<NavItem page={"/Register"} title="Register" />
-						</div>
-					</div>
-				</nav>
+		)
+	} return (
+		<div className="Navbar flex items-center justify-between">
+			<NavLogo />
+			<div className="absolute top-1 right-4 md:top-8">
+				<Hamburger color="white" toggled={isOpen} toggle={setOpen} />
 			</div>
 		</div>
 	)

@@ -16,9 +16,12 @@ display: none;
 
     .navBarListItems{
         flex-direction: column;
-        margin-top: 2rem;
+        margin-top: 1rem;
+        top:4;
         
     }
+
+
 
  
  }
